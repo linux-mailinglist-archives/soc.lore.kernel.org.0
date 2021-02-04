@@ -1,212 +1,166 @@
-Return-Path: <clang-built-linux+bncBAABBNV76CAAMGQEPW73INA@googlegroups.com>
+Return-Path: <clang-built-linux+bncBD4NDKWHQYDRBKED6GAAMGQEWILSTRA@googlegroups.com>
 X-Original-To: lists+clang-built-linux@lfdr.de
 Delivered-To: lists+clang-built-linux@lfdr.de
-Received: from mail-pg1-x540.google.com (mail-pg1-x540.google.com [IPv6:2607:f8b0:4864:20::540])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07A7D30F79C
-	for <lists+clang-built-linux@lfdr.de>; Thu,  4 Feb 2021 17:24:24 +0100 (CET)
-Received: by mail-pg1-x540.google.com with SMTP id s17sf2643109pgv.14
-        for <lists+clang-built-linux@lfdr.de>; Thu, 04 Feb 2021 08:24:23 -0800 (PST)
-ARC-Seal: i=2; a=rsa-sha256; t=1612455862; cv=pass;
+Received: from mail-il1-x13f.google.com (mail-il1-x13f.google.com [IPv6:2607:f8b0:4864:20::13f])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2822D30FBE1
+	for <lists+clang-built-linux@lfdr.de>; Thu,  4 Feb 2021 19:49:13 +0100 (CET)
+Received: by mail-il1-x13f.google.com with SMTP id s74sf3887628ilb.20
+        for <lists+clang-built-linux@lfdr.de>; Thu, 04 Feb 2021 10:49:13 -0800 (PST)
+ARC-Seal: i=2; a=rsa-sha256; t=1612464552; cv=pass;
         d=google.com; s=arc-20160816;
-        b=R/kCCwVhqXXoZLp3syfjNX9s1nPD8HvAnWuY7OYxzAeW5C6XUdGjS/2GwSFj81mG8W
-         tHssoa5XscMMW2CZvAKRKQ7/Jikn8uIofxcTOWfIg3Lm9KNtzu//KgnFrOOf2kSxpq7n
-         GEld8duVC4tUbnEL0HizmI8qS1sTT9dT511WZmV1MlSOmiW8YmvCtfjGOBm1C4Pzo4DZ
-         zhMIa37Sn82RyxOLHPb3Dch5yJkLvP05BDBolLW1Cne/x65VsYKwp5zZaeZiqCORtumN
-         2yI5UqIutrLghzXX6fEycdhFE6/e/CLmJbExR2MR3eZPWqktROiv+zD+gWdPtbSfNr2H
-         REUw==
+        b=jryqExm+Ez/ksYS5/8y0h5qBEeQVlfLGHtzPnrONFt+XH1WgBzwDcPvfMwaHVX7MV9
+         bnDzfkP9cmUrDgKZBvL7dbkQXseynYg5a7of6g4eBxqb/FxELSA+Fs2GSz70Aqa0a2pr
+         qbws8G7PcXFlXdydb6Nb5r4eH15vsX6Dsy4G2dUFL2ECVckDq9fh1u7QsTHymMUe4dzw
+         TTQKrq7GQxz29DKn9fFPWE9iHcvb/qGeWLAUiVKfNXnsZg4ZHONwEB4BNdXN0jrXaqKq
+         ww15OWpLVNyON7aynUyvWJDXY8dOHRMGZvMaGjKk73fknBkCHGgkeTz9YZl2CwquTRcH
+         IoUA==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
-        h=mime-version:message-id:date:subject:cc:list-id:to:from:sender
-         :dkim-signature;
-        bh=g/pw0yfRXicfdyPgw9OWiFeAVzHlHjNEu3JqKMuDlVQ=;
-        b=Z+MEuTjjIaKmI/K7ekP+a4IABbd0wcJgmq1H174ebuqID7cBC+iz/7GuT34a/33gox
-         4PYqsF0WGXOaZtY7nF9HygEiGLosdvMJipVyBxKvB6/IwP7WtAuSoXF+GlTv364j7u0c
-         nqJxlySubnbZjuSRYOpzOahxVsmTa3mXP/CBEUhjWzK3o6N/egzTgMQd9BGDvsueO/hP
-         Qh0JDNZTveuPI8o2lR7OWdkYjHqjG2ijK0DXm/kzK+u3gIN9pmkVwc4+XAeeD4KbGXLj
-         Y+CVPjgQ459T1NnKixX05aWfMrzM/H/m9FbYum0/udkuTlWThYgJKxBQvcs5GHqiCmfH
-         EHOA==
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:list-id:to:from:date:sender:dkim-signature;
+        bh=gWuJr5jCSbLyB5zUU0BWZidappahs70C4PBj3fDlImc=;
+        b=O0DE7gkJuDO6EE0xhAV+IVmk9z+KCe2KWSbZocKYtegwdXvMMXoWhB3hS1HkZUErDd
+         bNTTA+2s4HODkg1A2JAB7eIVslS+8Oi4Jp6sLvc/HD0PmYKaIkyb0XqVUZrGhBFeNppz
+         XvoEwcG/0FVXscnR/Jpcg1I3jid0Z82BmhzMuYzByfqILKVknDFMeT5a6UYro9VHb54z
+         WXGjTnmTNCzyJ+ycSN+0D0IdU8d1skhHKaiH0C//AUOVf9JcfPBAtx4us5EOBMsr+4nY
+         eUZrYJUi4cFwsVhTXjJUQJjXNDuR+Ep55r7jWxF8EPqPLkJTTYkvePjhoDOKvMuNaiOw
+         95eA==
 ARC-Authentication-Results: i=2; gmr-mx.google.com;
-       dkim=pass header.i=@kernel.org header.s=k20201202 header.b=m9wBdgig;
-       spf=pass (google.com: domain of arnd@kernel.org designates 198.145.29.99 as permitted sender) smtp.mailfrom=arnd@kernel.org;
+       dkim=pass header.i=@kernel.org header.s=k20201202 header.b=kcikoCRP;
+       spf=pass (google.com: domain of nathan@kernel.org designates 198.145.29.99 as permitted sender) smtp.mailfrom=nathan@kernel.org;
        dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=kernel.org
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=googlegroups.com; s=20161025;
-        h=sender:from:to:list-id:cc:subject:date:message-id:mime-version
-         :x-original-sender:x-original-authentication-results;
-        bh=g/pw0yfRXicfdyPgw9OWiFeAVzHlHjNEu3JqKMuDlVQ=;
-        b=I3VQOEKTYtOl8KK1aqLuawkhRljLneYEHbH2vCKwTE3aTxqby/L6mmhDqTClzH2Lni
-         FwjpVyg9apnQnZuyYlYbt2e3Xmf3X7x7Q+/S9+WrnQn8Nsjsr4VHpitgb4+ohUFazmcA
-         3sCtd73XJgbZHbJLtpTINzeSsHHGzZmPS1fhZ642rlN8KVRYl+pyd5WP5vNcJ3wACbrF
-         NHh+BgsmT4PcLSpxJsmrR+YLFuqKJQGElTLeg8TyT6VUpTuE+J71mfO5JJky9IWt0f07
-         l+II6qwH/PlM+dQ6lYIAKlw9yMCrITTT1trN3JNgkCEYasHiXVCg+Omn2W4B0i3DZ/Kh
-         u2Aw==
+        h=sender:date:from:to:list-id:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:x-original-sender
+         :x-original-authentication-results;
+        bh=gWuJr5jCSbLyB5zUU0BWZidappahs70C4PBj3fDlImc=;
+        b=knxH6xDvI8Ou7w03WhZUULtGqo/jRP1ucL01wFXHLdG2m2VMUdEXrsbcD9kSLVNdwT
+         Pq0ep/24Em+T5oJizQxtjJ6KetLQeYw0amh/0jWmk34OSif7VaaofTAofRkg8+qyNzK0
+         CMP9n1w/nt70hZyaX8+ehW0+iWlqznnViVzkzAlERDSozw4N0r/ifkbu3pHlGW0/uJoW
+         baTFtHpeCSlXLCLvNrJsntmsfdZqgdn6fYmiz+icMzEt4T3Mi6qzhsWn+/heRijJN27B
+         CUKUs6glLb02YU2e1DQrWUq3iO9vNumdHmYAj5FqdcPocVUHRiGIjWAHjiEYfrADCiVW
+         QXuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=sender:x-gm-message-state:from:to:list-id:cc:subject:date
-         :message-id:mime-version:x-original-sender
-         :x-original-authentication-results;
-        bh=g/pw0yfRXicfdyPgw9OWiFeAVzHlHjNEu3JqKMuDlVQ=;
-        b=iPxfeQLh4y/GmtuzlCFJITVvfYVoOyRigWFVSjF7rXzUQSTShIAJLXy2HvCy/hZb4F
-         xKYFazKdJsaVj97eoglaPizPWQMDwzoEM38WSZHzxEFDijANOi0j8uMi3SfLhRZj5jYs
-         BS3VBmccln7Cu3QfzTTKQHyJyR2ZRnKnfLZbeJCulgcBw08NhJC0I+WSUTFk9GsN+0Si
-         6OT0Pn21/+VH+lmqAPffEBT9mgdW1l41U7fH6FSJUAyS4lb9z0nTl+h5CvZ5/bbNi1Z+
-         liMaL8LgiDgCUE9O4Lc3/JgtWUNfITgA4GMNA+rMljHDVYzoR2hPhTfh3OVOw2SZaUZy
-         Dr4Q==
+        h=sender:x-gm-message-state:date:from:to:list-id:cc:subject
+         :message-id:references:mime-version:content-disposition:in-reply-to
+         :x-original-sender:x-original-authentication-results;
+        bh=gWuJr5jCSbLyB5zUU0BWZidappahs70C4PBj3fDlImc=;
+        b=AwJYEbhd+JGkHHk22mG5jVJbjuMG+KCkfr9n3rizn1ys+qZyp4SL98UrAjVQM3zRCS
+         6zJ9WGUoOS5kBShcGj23sQkiDB25Hfde2Y0yRxkilvCq0LUyOmexr/LFagi90Ss6DgMI
+         jkdG9p2cZ5yrpSFkIbLz5ql3W6Q9vDisJPNi4PwlsWrxIl2mHi2HnTdWYk8Zw44wqHq7
+         QYV+AFe1lmPnExjRqc/Uhqtts6UijyICb7KO8mEmRbGEbnBTazcw+x98rSIaAoRHZ5NN
+         D9jUM7mVlMwl4wbcwZJAly/U7fGSMdDRwpmRb9BqAgGJUBiAhZCo3aJB9mbUT7e2vfLI
+         ZReA==
 Sender: clang-built-linux@googlegroups.com
-X-Gm-Message-State: AOAM532wLqR/EtP1dWbiP52hRMkpEY306JayBFb+o58UTqi5lA/Xzfw3
-	y62Vyus1F1jktDDMXdIfGwQ=
-X-Google-Smtp-Source: ABdhPJzSgW68wYs2q2Ka0joo/ubgSLa8D3kx8CPIUX4GyscyRtcdUj4NUbpxCiQoONDKp9pCYsw9Kg==
-X-Received: by 2002:a63:a03:: with SMTP id 3mr9532775pgk.366.1612455862568;
-        Thu, 04 Feb 2021 08:24:22 -0800 (PST)
+X-Gm-Message-State: AOAM533HaHX4vE9bJiCZ1fQY7Se7NnVzzDxHxdmFdYUyA0h2k5/Oj02F
+	gGQeSZu7Nf6CGFlZZ14Jpw8=
+X-Google-Smtp-Source: ABdhPJwK4mOkqM3z/uFSH7Z6gXcuCgKMnTqO/Qb+naedc0JdvRR7szpGK4ZA0TYc6WQpFfYFYnDFGw==
+X-Received: by 2002:a05:6e02:1c2a:: with SMTP id m10mr448490ilh.17.1612464552176;
+        Thu, 04 Feb 2021 10:49:12 -0800 (PST)
 X-BeenThere: clang-built-linux@googlegroups.com
-Received: by 2002:a17:902:a707:: with SMTP id w7ls2919331plq.9.gmail; Thu, 04
- Feb 2021 08:24:22 -0800 (PST)
-X-Received: by 2002:a17:902:c94d:b029:de:9b70:d886 with SMTP id i13-20020a170902c94db02900de9b70d886mr166449pla.5.1612455862015;
-        Thu, 04 Feb 2021 08:24:22 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1612455862; cv=none;
+Received: by 2002:a5d:80cb:: with SMTP id h11ls1070051ior.3.gmail; Thu, 04 Feb
+ 2021 10:49:11 -0800 (PST)
+X-Received: by 2002:a5d:8d94:: with SMTP id b20mr644625ioj.200.1612464551748;
+        Thu, 04 Feb 2021 10:49:11 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1612464551; cv=none;
         d=google.com; s=arc-20160816;
-        b=qrlgzyzbIunGjnZDPqs+33yyaiOLI9kBYs73ii37ampYlkZkoWmWpXY0T2D8Sw5uyu
-         8NcVU3SSaJVJTXthYqUzL5Y2DoosQ8FcGPObgVqUKFp1gBjr/0h+smlpHrAX7UkwsCsl
-         qXP+3As/UV09jwAWmFws3ThBLrjRwHIce+4B3BvsDPi2crcKQ0WnQuH64aY+ZkIxOkC+
-         qunZPEQTjKQJ2s59xF+BdfCHzpjlbwTBGWN9bMAbHQxSvK/FTIr5qBsReXnDsxYu0f/Z
-         L+H7reAnm8jjC4r0rCzwusl6IKJ50SoLhAss3TGtHgiYDUdwiI2o41LjjHEwnbJhi5k3
-         9HDQ==
+        b=LIjqhG1+RZFkdTXUCxT63iU9Lty0Wa4wfoOjs2ESneYC408EoWtNwhmBs/soPBxyL7
+         /OZeLaNAp3EZtkX22ZnR4Gh/4x2Hc2FLEE7AdPGB1K9D5ZwrmOUegxTQRVPnl6R/KFGd
+         YuJ+674DWDKcQEE+Ux5xsnWGxlbYJu2iZmPsUHxoFw99oecJtjnv/qwEPqT89lzAkLPF
+         D4maa8UgBRf1jcgmb7MsqspcSzlk4o1YDRLG0wmKbj26bxz/F52XQuIzHjN+36MSWYgw
+         Cjfbwseh6imILkGo9FaJA5FTyziDpZAFzXW7dUP1DAoF898fAdxO/Hg3/TkLCqWQELbu
+         vMCw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :list-id:to:from:dkim-signature;
-        bh=h7MJ4x5ogW7ahwBFEcDW+UnUrz2w4HTkQDTB419X/HM=;
-        b=vJ4vt64EEEFH3gnw3VQhGKSWeM36tK/QNxdQ/i0e4YvBsoMmIFFuUixnWTsaWqTpKw
-         5ta0lEBgmTzZULxj8iTMnDK4KiR5uPZN9PYliZs4sXfo00yMcLL+VjNogjqDY6WOxAsC
-         uUQd0FeHoMHuumGVEt8pOB/TQdhtQ0hsgCUC7SSYGfoZlu4nsVq66SFmukridTKDDG2v
-         e6Jp3/WLxL6dwuaKXgi38LEXpT2c5HPX/45DZtt1Pk+Dh3HY+rgsNiY3PcXLirULIR7N
-         9yGEpT0Ry0DhN4JL4F+kxNZWsPGFLg7Xb0QLHZIPUZQd2os7CDZdiSgRKEkXuUMK8ySX
-         IhMA==
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:list-id:to:from:date:dkim-signature;
+        bh=pYltHGXTm5nsdVFlQ4HGP2L5gDlBDP2zI2Fhy/vpnuM=;
+        b=WTsKBxQi8+KyoNYJdyBmwXTMgApYPzEyPlChg1m73S1Wlc6YKjScDD3oljGhzPBiSs
+         cQP8AUQgGy+eoH77pNwRtNx2qm0nbCOSldNGu2vFEm99EuKXXLxLC9FatIp6tFvMkA4Z
+         KwIMPyzmbih/VdI0ioKFA1qy+nme5cYTVBeCYbm5bDjfgQ6un5EGBGg7cpEBFvFJnGd0
+         mS/s65jAEygcJN09i4Gg8/O4eDN3rZYKN+TXQg1WH7l+B6M/N2XTueSWJb4VY+8J0E0f
+         roJAS3MlGoqpOslR24TYljAcXqbuzcfgbq6550HQWLx5OBFQr8D87KJ3QV4Js8U6lkGG
+         98TQ==
 ARC-Authentication-Results: i=1; gmr-mx.google.com;
-       dkim=pass header.i=@kernel.org header.s=k20201202 header.b=m9wBdgig;
-       spf=pass (google.com: domain of arnd@kernel.org designates 198.145.29.99 as permitted sender) smtp.mailfrom=arnd@kernel.org;
+       dkim=pass header.i=@kernel.org header.s=k20201202 header.b=kcikoCRP;
+       spf=pass (google.com: domain of nathan@kernel.org designates 198.145.29.99 as permitted sender) smtp.mailfrom=nathan@kernel.org;
        dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=kernel.org
 Received: from mail.kernel.org (mail.kernel.org. [198.145.29.99])
-        by gmr-mx.google.com with ESMTPS id n13si329582pfd.1.2021.02.04.08.24.21
+        by gmr-mx.google.com with ESMTPS id d13si264669iow.0.2021.02.04.10.49.11
         for <clang-built-linux@googlegroups.com>
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 04 Feb 2021 08:24:22 -0800 (PST)
-Received-SPF: pass (google.com: domain of arnd@kernel.org designates 198.145.29.99 as permitted sender) client-ip=198.145.29.99;
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 5E86A64E3F;
-	Thu,  4 Feb 2021 16:24:19 +0000 (UTC)
-From: Arnd Bergmann <arnd@kernel.org>
-To: Krzysztof Kozlowski <krzk@kernel.org>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Nick Desaulniers <ndesaulniers@google.com>
+        Thu, 04 Feb 2021 10:49:11 -0800 (PST)
+Received-SPF: pass (google.com: domain of nathan@kernel.org designates 198.145.29.99 as permitted sender) client-ip=198.145.29.99;
+Received: by mail.kernel.org (Postfix) with ESMTPSA id E115864DE1;
+	Thu,  4 Feb 2021 18:49:09 +0000 (UTC)
+Date: Thu, 4 Feb 2021 11:49:07 -0700
+From: Nathan Chancellor <nathan@kernel.org>
+To: Arnd Bergmann <arnd@kernel.org>
 List-Id: <soc.lore.kernel.org>
-Cc: Ben Dooks <ben-linux@fluff.org>,
-	soc@kernel.org,
-	Arnd Bergmann <arnd@arndb.de>,
-	Stefan Agner <stefan@agner.ch>,
-	Russell King <linux@armlinux.org.uk>,
-	linux-arm-kernel@lists.infradead.org,
-	linux-samsung-soc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	clang-built-linux@googlegroups.com
-Subject: [PATCH] ARM: s3c: fix fiq for clang IAS
-Date: Thu,  4 Feb 2021 17:23:42 +0100
-Message-Id: <20210204162416.3030114-1-arnd@kernel.org>
-X-Mailer: git-send-email 2.29.2
+Cc: Russell King <linux@armlinux.org.uk>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Ludovic Desroches <ludovic.desroches@microchip.com>,
+	Nick Desaulniers <ndesaulniers@google.com>,
+	Claudiu Beznea <claudiu.beznea@microchip.com>, soc@kernel.org,
+	Arnd Bergmann <arnd@arndb.de>, Stephen Boyd <sboyd@kernel.org>,
+	clang-built-linux@googlegroups.com,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] ARM: at91: use proper asm syntax in pm_suspend
+Message-ID: <20210204184907.GA2991903@localhost>
+References: <20210204160129.2249394-1-arnd@kernel.org>
 MIME-Version: 1.0
-X-Original-Sender: arnd@kernel.org
-X-Original-Authentication-Results: gmr-mx.google.com;       dkim=pass
- header.i=@kernel.org header.s=k20201202 header.b=m9wBdgig;       spf=pass
- (google.com: domain of arnd@kernel.org designates 198.145.29.99 as permitted
- sender) smtp.mailfrom=arnd@kernel.org;       dmarc=pass (p=NONE sp=NONE
- dis=NONE) header.from=kernel.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Disposition: inline
+In-Reply-To: <20210204160129.2249394-1-arnd@kernel.org>
+X-Original-Sender: nathan@kernel.org
+X-Original-Authentication-Results: gmr-mx.google.com;       dkim=pass
+ header.i=@kernel.org header.s=k20201202 header.b=kcikoCRP;       spf=pass
+ (google.com: domain of nathan@kernel.org designates 198.145.29.99 as
+ permitted sender) smtp.mailfrom=nathan@kernel.org;       dmarc=pass (p=NONE
+ sp=NONE dis=NONE) header.from=kernel.org
 
-From: Arnd Bergmann <arnd@arndb.de>
+On Thu, Feb 04, 2021 at 05:01:20PM +0100, Arnd Bergmann wrote:
+> From: Arnd Bergmann <arnd@arndb.de>
+> 
+> Compiling with the clang integrated assembler warns about
+> a recently added instruction:
+> 
+> <instantiation>:14:13: error: unknown token in expression
+>  ldr tmp1, =#0x00020010UL
+> arch/arm/mach-at91/pm_suspend.S:542:2: note: while in macro instantiation
+>  at91_plla_enable
+> 
+> Remove the extra '#' character that is not used for the 'ldr'
+> instruction when doing an indirect load of a constant.
+> 
+> Fixes: 4fd36e458392 ("ARM: at91: pm: add plla disable/enable support for sam9x60")
+> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
 
-Building with the clang integrated assembler produces a couple of
-errors for the s3c24xx fiq support:
+Reviewed-by: Nathan Chancellor <nathan@kernel.org>
 
-arch/arm/mach-s3c/irq-s3c24xx-fiq.S:52:2: error: instruction 'subne' can not set flags, but 's' suffix specified
- subnes pc, lr, #4 @@ return, still have work to do
- ^
-arch/arm/mach-s3c/irq-s3c24xx-fiq.S:64:1: error: invalid symbol redefinition
-s3c24xx_spi_fiq_txrx:
-^
-arch/arm/mach-s3c/irq-s3c24xx-fiq.S:79:2: error: instruction 'subne' can not set flags, but 's' suffix specified
- subnes pc, lr, #4 @@ return, still have work to do
- ^
-arch/arm/mach-s3c/irq-s3c24xx-fiq.S:104:2: error: instruction 'subne' can not set flags, but 's' suffix specified
- subnes pc, lr, #4 @@ return, still have work to do
-
-There are apparently two problems: one with extraneous or duplicate
-labels, and one with old-style opcode mnemonics. Stefan Agner has
-previously fixed other problems like this, but missed this particular
-file.
-
-Fixes: bec0806cfec6 ("spi_s3c24xx: add FIQ pseudo-DMA support")
-Cc: Stefan Agner <stefan@agner.ch>
-Signed-off-by: Arnd Bergmann <arnd@arndb.de>
----
- arch/arm/mach-s3c/irq-s3c24xx-fiq.S | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
-
-diff --git a/arch/arm/mach-s3c/irq-s3c24xx-fiq.S b/arch/arm/mach-s3c/irq-s3c24xx-fiq.S
-index b54cbd012241..5d238d9a798e 100644
---- a/arch/arm/mach-s3c/irq-s3c24xx-fiq.S
-+++ b/arch/arm/mach-s3c/irq-s3c24xx-fiq.S
-@@ -35,7 +35,6 @@
- 	@ and an offset to the irq acknowledgment word
- 
- ENTRY(s3c24xx_spi_fiq_rx)
--s3c24xx_spi_fix_rx:
- 	.word	fiq_rx_end - fiq_rx_start
- 	.word	fiq_rx_irq_ack - fiq_rx_start
- fiq_rx_start:
-@@ -49,7 +48,7 @@ fiq_rx_start:
- 	strb	fiq_rtmp, [ fiq_rspi, # S3C2410_SPTDAT ]
- 
- 	subs	fiq_rcount, fiq_rcount, #1
--	subnes	pc, lr, #4		@@ return, still have work to do
-+	subsne	pc, lr, #4		@@ return, still have work to do
- 
- 	@@ set IRQ controller so that next op will trigger IRQ
- 	mov	fiq_rtmp, #0
-@@ -61,7 +60,6 @@ fiq_rx_irq_ack:
- fiq_rx_end:
- 
- ENTRY(s3c24xx_spi_fiq_txrx)
--s3c24xx_spi_fiq_txrx:
- 	.word	fiq_txrx_end - fiq_txrx_start
- 	.word	fiq_txrx_irq_ack - fiq_txrx_start
- fiq_txrx_start:
-@@ -76,7 +74,7 @@ fiq_txrx_start:
- 	strb	fiq_rtmp, [ fiq_rspi, # S3C2410_SPTDAT ]
- 
- 	subs	fiq_rcount, fiq_rcount, #1
--	subnes	pc, lr, #4		@@ return, still have work to do
-+	subsne	pc, lr, #4		@@ return, still have work to do
- 
- 	mov	fiq_rtmp, #0
- 	str	fiq_rtmp, [ fiq_rirq, # S3C2410_INTMOD  - S3C24XX_VA_IRQ ]
-@@ -88,7 +86,6 @@ fiq_txrx_irq_ack:
- fiq_txrx_end:
- 
- ENTRY(s3c24xx_spi_fiq_tx)
--s3c24xx_spi_fix_tx:
- 	.word	fiq_tx_end - fiq_tx_start
- 	.word	fiq_tx_irq_ack - fiq_tx_start
- fiq_tx_start:
-@@ -101,7 +98,7 @@ fiq_tx_start:
- 	strb	fiq_rtmp, [ fiq_rspi, # S3C2410_SPTDAT ]
- 
- 	subs	fiq_rcount, fiq_rcount, #1
--	subnes	pc, lr, #4		@@ return, still have work to do
-+	subsne	pc, lr, #4		@@ return, still have work to do
- 
- 	mov	fiq_rtmp, #0
- 	str	fiq_rtmp, [ fiq_rirq, # S3C2410_INTMOD  - S3C24XX_VA_IRQ ]
--- 
-2.29.2
+> ---
+>  arch/arm/mach-at91/pm_suspend.S | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-at91/pm_suspend.S b/arch/arm/mach-at91/pm_suspend.S
+> index 909856c8a8c6..0d467cc40129 100644
+> --- a/arch/arm/mach-at91/pm_suspend.S
+> +++ b/arch/arm/mach-at91/pm_suspend.S
+> @@ -446,7 +446,7 @@ ENDPROC(at91_backup_mode)
+>  	str	tmp1, [pmc, #AT91_PMC_PLL_UPDT]
+>  
+>  	/* step 2. */
+> -	ldr	tmp1, =#AT91_PMC_PLL_ACR_DEFAULT_PLLA
+> +	ldr	tmp1, =AT91_PMC_PLL_ACR_DEFAULT_PLLA
+>  	str	tmp1, [pmc, #AT91_PMC_PLL_ACR]
+>  
+>  	/* step 3. */
+> -- 
+> 2.29.2
+> 
 
 -- 
 You received this message because you are subscribed to the Google Groups "Clang Built Linux" group.
 To unsubscribe from this group and stop receiving emails from it, send an email to clang-built-linux+unsubscribe@googlegroups.com.
-To view this discussion on the web visit https://groups.google.com/d/msgid/clang-built-linux/20210204162416.3030114-1-arnd%40kernel.org.
+To view this discussion on the web visit https://groups.google.com/d/msgid/clang-built-linux/20210204184907.GA2991903%40localhost.
