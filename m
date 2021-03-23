@@ -1,155 +1,175 @@
-Return-Path: <clang-built-linux+bncBAABB7WV46BAMGQESJUL4BQ@googlegroups.com>
+Return-Path: <clang-built-linux+bncBD4NDKWHQYDRB27E5CBAMGQEHAWJNXA@googlegroups.com>
 X-Original-To: lists+clang-built-linux@lfdr.de
 Delivered-To: lists+clang-built-linux@lfdr.de
-Received: from mail-qv1-xf3e.google.com (mail-qv1-xf3e.google.com [IPv6:2607:f8b0:4864:20::f3e])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A608345F82
-	for <lists+clang-built-linux@lfdr.de>; Tue, 23 Mar 2021 14:19:59 +0100 (CET)
-Received: by mail-qv1-xf3e.google.com with SMTP id s16sf1573966qvw.3
-        for <lists+clang-built-linux@lfdr.de>; Tue, 23 Mar 2021 06:19:59 -0700 (PDT)
-ARC-Seal: i=2; a=rsa-sha256; t=1616505598; cv=pass;
+Received: from mail-qt1-x839.google.com (mail-qt1-x839.google.com [IPv6:2607:f8b0:4864:20::839])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FC2B346782
+	for <lists+clang-built-linux@lfdr.de>; Tue, 23 Mar 2021 19:24:44 +0100 (CET)
+Received: by mail-qt1-x839.google.com with SMTP id m35sf1749883qtd.11
+        for <lists+clang-built-linux@lfdr.de>; Tue, 23 Mar 2021 11:24:44 -0700 (PDT)
+ARC-Seal: i=2; a=rsa-sha256; t=1616523883; cv=pass;
         d=google.com; s=arc-20160816;
-        b=qQQlMJsQ5pBcRH1+3+SRCd5A3HHGeNVA++5sudmjkxHX0vpKC2W+WkxEPQbwIQxvNb
-         WG8yftK7B3/sX3AUDvaRHdFcvAZGG6OXXjIDRPQEuBQtbZyPp92hZ+33OKxjaAB+QDYQ
-         x2fkndqbWBTYf5t7Ne+m9VwlAbWTIICwW6T5pEbxniVqqRnJM5+h4LRbDqZ//1PRRTD+
-         +sRhC9AwQqu9AIshptQMX/BZY28+Rh4qVMLedbGlKe/AGMLq7fFh4XCc5dCGPYVRIllX
-         O+utz8m3I9p5QcAVaOEwJ0nHcdxVbJb9KkslN95f9Lb95+Oml3dNxT8ZSIDaji8s62/3
-         ZHlA==
+        b=pDzR77GOoPZr47WNFpaNrgptd92W2H9ZAeE/Rzr7+dOZ7D0g9KJopVdxlzlfFD1O4e
+         kRxwG+gsvmGgchRCj+jO7x3H9Zi/b9EKYr2tlGnw2YMzxUJKm5kSrejisWIZduG73Fk+
+         0VEHGQ6znseR4Lr6kiMdXu1jKDgAQRMwmU12Wwl4sTLilOLS9vWovV3sRIdBCajEdhNt
+         qsCE0X0B9nF+/Dgw45k8ZxcDTwQN3mDHrdrvGUPYJEWLFrbbvoYStdN7GnjlpEdFVwOg
+         n+Q9cWjI6hdgeQ6ATEDx8kef5dShkHpIOwqyq9Ct4zM7kGd6fTiYjOavqspYIINQ3fUU
+         3H6Q==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
-        h=mime-version:message-id:date:subject:cc:list-id:to:from:sender
-         :dkim-signature;
-        bh=MgCmGiAe1wKW1hIpdIsY5q0YN4PUGSnqOgN55u0k3+w=;
-        b=f9YFgDbRL6eRNZQKOe95NdG2nTUdhwL8NXrSTsftkWW0sueUhAXAd8YA2JD/E7JdlT
-         J1SySOr4RHJ3wVQbfX8GYF/6mO3fUYBPjquLAWyfueQ7XaDdm3dlE5GG66KoOiISvNmY
-         wmDR6QPLD4aeCNNiR469kPJV1516mk1fV5jdMS8KKL2E8XAHbTvdO5DEsVwXxGHKIG7Y
-         UpL+iWqB0wZ6f6+yV1pKfXJ/VLPQJjXSV1GewDENTyGHs/GSk0L8bbsaUcTL3K3vqsSs
-         pUrDeInJQd+0AmXmD3oT0ksT73u6JOILbRXFdYAryJQxh1efaR0A1NgqdjMV+cY2ZRTu
-         sU1A==
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:list-id:to:from:date:sender:dkim-signature;
+        bh=OTEo3mxI3R8JqeeebntnVE1J+US5ZpKIjvGzlBSTmAE=;
+        b=c4wfnAAVTx2jXqKxZ/O+vSvGd/xh3oBsO+ygMheKHlhWQ4PvzN7UYe31yQwuOytXN/
+         GvrTnWLsu714lU1wv6k8z2J59SRGyUWu1uRFo4ZdsAFIJ9zXr1SAfG1nnKUTANbEPUmy
+         Dppncu9U8JB412kMa8pQxO3gc72skECkugmYTbu1siiOyXNbQz176Gj5Z+/qyTAP77VL
+         foEV/HqDq1F3JRSabTFhS7fwIKRIDE7j+X8MwsK+e53mvgm+NAlqN8X0BrRQoeWfolEl
+         Wi3XFjSQwuBP4DMz5LGXzUZzmgYkhiBUh5eY8uvE4Ztr1eam+Au2nIfzpCqHnrVUCuCT
+         fA/Q==
 ARC-Authentication-Results: i=2; gmr-mx.google.com;
-       dkim=pass header.i=@kernel.org header.s=k20201202 header.b=iueD3kIy;
-       spf=pass (google.com: domain of arnd@kernel.org designates 198.145.29.99 as permitted sender) smtp.mailfrom=arnd@kernel.org;
+       dkim=pass header.i=@kernel.org header.s=k20201202 header.b=ncRSA4f2;
+       spf=pass (google.com: domain of nathan@kernel.org designates 198.145.29.99 as permitted sender) smtp.mailfrom=nathan@kernel.org;
        dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=kernel.org
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=googlegroups.com; s=20161025;
-        h=sender:from:to:list-id:cc:subject:date:message-id:mime-version
-         :x-original-sender:x-original-authentication-results;
-        bh=MgCmGiAe1wKW1hIpdIsY5q0YN4PUGSnqOgN55u0k3+w=;
-        b=FQR7fg2iTOxz/2Pt3BifBQ5Jn/Ys6AIZnpTl/zdg7RR6Ix60lSvrAZ9FoH+qu+XyWr
-         dRudyTYs/SUzodLjTM/FdEO+nn0pwCwqYNpfMzN7iwZrly9LzcDWrABBVO1S6J0MZo1t
-         ltm8C4OBOjzwfdDwcx5L3wSIIbQZYl8mw/2TDFDDQQeejvuGpyanlM5nfpXvsAiAAxKv
-         7yq3/zWv07UHI2k/dUMl34qkZH+VHJ7ZQvCTbTFb0FRrPc87FD6EAxTvdbK/+iIwBbCp
-         pw62/pdVwaLRZFX4PwkQ8Lg1Wyjuc4iUXd4eZbjRnFeDB7wCc0riJMR1A0alY/NtqMdg
-         PR3g==
+        h=sender:date:from:to:list-id:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:x-original-sender
+         :x-original-authentication-results;
+        bh=OTEo3mxI3R8JqeeebntnVE1J+US5ZpKIjvGzlBSTmAE=;
+        b=nyyO4jeIUYAd3N06QVjfOEpxdGI3vehT16rXHz7hLmrgn7E2PHTxKf6piV+O8dwov0
+         Ix3CvPWrhu+ecjYYZndUYdIr7dB77S04WlYk62w577jfU19ZAlct4bI+9s+dPyKhf+um
+         /08vr+sZl7lkZleM8iGa/h4nPHAO7AtjaZDKhIDLCCf5a67uCCmL2VApu4G4REwm09DC
+         U7kKvyh9CskJhwGY2AN9OKWLNUMTudTWOSc9TXglFUWJrzdTVrorFjlFosucUfED+mjU
+         wey2McNkH1ReHY4bh1O+/udUCfh/RpbizkS3CD7Ib4+oafhYXSuhcyHhE/gJlS0mbGZj
+         9ArA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=sender:x-gm-message-state:from:to:list-id:cc:subject:date
-         :message-id:mime-version:x-original-sender
-         :x-original-authentication-results;
-        bh=MgCmGiAe1wKW1hIpdIsY5q0YN4PUGSnqOgN55u0k3+w=;
-        b=t8nIGDCIZ/DSTg1DSdFjf1BCQZWFHyzWx22cZ4yN9AXumUocYy20WJkVIR87qw49+b
-         youKwHhRH9Wp0+tWC16fGxcM3lbH/T2U/L9NbtddeP/puD7I87R22VeiLOcgiSTSbasv
-         mjqz6KuNKVN1eUuUCG7fRPDyzgecxr45+v/9+wOBJDslcgORmSJNq6JfQLtlIeHVaK28
-         QIplrB3aIAj7c6Ci392F5NIhAsDh/PCLrZ8CHIAmFOeEiH4YABbBu24dSeEcKZ2vSWtu
-         4FcTup3t30+sG88BfksiKRoIWzNccJ/JNCVr0Pvp/KBpgwNQdQl/PrWleCNTsxfvZKhH
-         c1JA==
+        h=sender:x-gm-message-state:date:from:to:list-id:cc:subject
+         :message-id:references:mime-version:content-disposition:in-reply-to
+         :x-original-sender:x-original-authentication-results;
+        bh=OTEo3mxI3R8JqeeebntnVE1J+US5ZpKIjvGzlBSTmAE=;
+        b=dp7XaYDtQ8DPHXP5xqtJtM5/cxQpPVFZg6LfIqTjkHoBR+9GM2eekMN1/7AnmH+KSw
+         oyVu+hUq8Mpmq/er9T/CU+t5ppQFFlPAdQc7odC6GyEj4YuKK4ZYkHZoLMBm27jDMy6+
+         X4uU8CX9odQzRy37iStG1IWfW9P1xrtfqPdIZixaH1LCss36Ysy1UZ1jS1NfoeBrpf72
+         u45dhSbfDqFJW7pUPyBp+5ylkF3v2WWwEx6y8Hucqx0SmZctaZFNIiip5/xg3D1URere
+         PGJ2iPCA5B7sEGMQpmHGqWU4pbgf5AWHlILXbd5A4HPYZFN1DO6p0IcNLkqM8CsTa+ZE
+         5wlA==
 Sender: clang-built-linux@googlegroups.com
-X-Gm-Message-State: AOAM533Iz7w6iDHiuQVeIe0vxpGdy2/5/zm5RK67ri/HHffPkcyATZyL
-	Yvd1QT3g3Htn3+ugm2fMsSo=
-X-Google-Smtp-Source: ABdhPJxXM1PV72cUMUAsC0gweJGgsnBN12r7NUZuLT76fEDArZR4yzln2yHWgA47I0dS5DgONyRmWQ==
-X-Received: by 2002:ad4:51c1:: with SMTP id p1mr5217930qvq.39.1616505598640;
-        Tue, 23 Mar 2021 06:19:58 -0700 (PDT)
+X-Gm-Message-State: AOAM532njOuvpwFLEWgASkisv5YSPzEaS2SMPG7pcInzZnZVlB88+B+K
+	DYe1fm33091OmHP9NTwmuoI=
+X-Google-Smtp-Source: ABdhPJyNxLSHOOdKj+wcdQyZ867NtfqGHp/O/oose2Dk9uJQYoVkYesaFtNXNy1Sk1v14fl0LDAq9g==
+X-Received: by 2002:ac8:695a:: with SMTP id n26mr5668499qtr.20.1616523883674;
+        Tue, 23 Mar 2021 11:24:43 -0700 (PDT)
 X-BeenThere: clang-built-linux@googlegroups.com
-Received: by 2002:ac8:71d9:: with SMTP id i25ls6130304qtp.8.gmail; Tue, 23 Mar
- 2021 06:19:58 -0700 (PDT)
-X-Received: by 2002:a05:622a:110:: with SMTP id u16mr2749894qtw.254.1616505598167;
-        Tue, 23 Mar 2021 06:19:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1616505598; cv=none;
+Received: by 2002:ac8:5a88:: with SMTP id c8ls3666621qtc.1.gmail; Tue, 23 Mar
+ 2021 11:24:43 -0700 (PDT)
+X-Received: by 2002:ac8:5196:: with SMTP id c22mr5491993qtn.155.1616523883245;
+        Tue, 23 Mar 2021 11:24:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1616523883; cv=none;
         d=google.com; s=arc-20160816;
-        b=dspfz/n7G1t99M7iKYkG4ausQXlwk0irOxQmwc+q7aYY+ld2jLwiV0aJTZCEECzqRt
-         o9e2R312aWj9skWra/F2joNegaaiYZCHy69QmTD9grcHdK2EPeflQ2DAWlDiAxctWXRf
-         LpTcJQ1aAGtWQntgkMUEl0gynlHOsOx7qcl+/XeMYJPZxhj6T10m8x1AT+E37bcqVQyy
-         IuUehdOSK4sY2dNkSSJGCbbdkoE0C67XbPxV3exrU/yyk25gYNeLVG1+X9hLmfa9vKz2
-         O2VbIuwsqSJd4cKsJaGrWW0WOmFrdA8CT+x1p6RCBbzF+avk/cccjIhG8GcSNtiVXmVw
-         Z4AQ==
+        b=OUyk7F7r4gPiT6HUr/ofOIUuu12Y6YH+W5AopjBd1kKGITnM5EjjpAWAOyFw5LY+0F
+         EdgFwV0eMMwVVqKbbTC1Oqg/TxqgRyhvapKITeEi2CtDQXQivwHoKMCs/MovEqrRTpo0
+         dyP/SY8YfpxZ2WWovgdaeQ8pfZQ+uY1nErUEK3tTL7BIL7NpT6Vh4sM4BxVIKYY+jX9+
+         ktbr+RXN6ZLfB/2Rbnw/o7enULFQjfC7a1ryVTeSeUQ4NSWTlb7tIPJtadhHsbnEXRS3
+         DIolkrybq9XxwfHlM4+uQN33tfLxDT3HMhTzaLl78X+l0p+L190NuO99KC8VVMPuNggB
+         RxCQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :list-id:to:from:dkim-signature;
-        bh=QM6KtXQPgLI75/QT/i6iEQpYREzisY3Mz9JnKAg8Lq8=;
-        b=FtXDJl/NvVVF9jsF/feV9kp7s17tDonjffuXbUNlRU9rEjPJzi1hATsv9mbzM6fOwK
-         mmtsN+JidGpRrSCPlrsqOirKlWcJ+6CKD59ghrVyoXNa2NZwTcIUssVFvMN08dIR76Dt
-         648pDoon4uW5eFfxLhlEsd+X6oqzVmsdCe1E/hxbPXilSL0j/GY5vksADsDocea/2FKn
-         KVM141V+6UPvpqLRnRNKSLZAAuOXhSYqdfVsZ/rSTP4uC7AMXsTaQxPvo9EMwqRbuh2p
-         uTGZkO8dagVV/AI+n8kYLklm789QxB0rufWecz92naJcHNxwpg+zj1bxnxRKUhk2wPNM
-         6ngA==
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:list-id:to:from:date:dkim-signature;
+        bh=H7LBY7u0RiV/2WE7pu8d7QkQPleINMowF0vpotWqswk=;
+        b=WmUOGVQtQ5YffnMgXe1lpESTVdu/7yBVMeAIwLHEwrKwCUYsZM9v2jNIueSupxI+3u
+         DYnVg8ol3dPP3q0q9nDkZ+TEtk183rlQwWRlf6+M9Dq4Hq4gH5z0bo/3fZDsKiPDzcbt
+         A4M/c2wjZ/Ud5Uk8gJFida8sLh6pKJIG6sI9Zg9BaQBu4v9PL03n83c8jsf5Lw3G5994
+         XnjytdK37WG7nbLk2YaGu5wueehkJh9PTrlX5H6AENHN/0bRT991iQG8qsaLxx5I4pF3
+         SjEnkmOBsOYxZJynVO43L2gT5kENYMp/8xx3paridL8sy07l5CHukSKHxkGB+D79rwSO
+         nR7Q==
 ARC-Authentication-Results: i=1; gmr-mx.google.com;
-       dkim=pass header.i=@kernel.org header.s=k20201202 header.b=iueD3kIy;
-       spf=pass (google.com: domain of arnd@kernel.org designates 198.145.29.99 as permitted sender) smtp.mailfrom=arnd@kernel.org;
+       dkim=pass header.i=@kernel.org header.s=k20201202 header.b=ncRSA4f2;
+       spf=pass (google.com: domain of nathan@kernel.org designates 198.145.29.99 as permitted sender) smtp.mailfrom=nathan@kernel.org;
        dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=kernel.org
 Received: from mail.kernel.org (mail.kernel.org. [198.145.29.99])
-        by gmr-mx.google.com with ESMTPS id b4si1007007qkh.2.2021.03.23.06.19.58
+        by gmr-mx.google.com with ESMTPS id w1si301863qkp.4.2021.03.23.11.24.43
         for <clang-built-linux@googlegroups.com>
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 23 Mar 2021 06:19:58 -0700 (PDT)
-Received-SPF: pass (google.com: domain of arnd@kernel.org designates 198.145.29.99 as permitted sender) client-ip=198.145.29.99;
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 9652761878;
-	Tue, 23 Mar 2021 13:19:54 +0000 (UTC)
-From: Arnd Bergmann <arnd@kernel.org>
-To: Andrew Lunn <andrew@lunn.ch>,
-	Gregory Clement <gregory.clement@bootlin.com>
+        Tue, 23 Mar 2021 11:24:43 -0700 (PDT)
+Received-SPF: pass (google.com: domain of nathan@kernel.org designates 198.145.29.99 as permitted sender) client-ip=198.145.29.99;
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 9CDE7619C0;
+	Tue, 23 Mar 2021 18:24:39 +0000 (UTC)
+Date: Tue, 23 Mar 2021 11:24:36 -0700
+From: Nathan Chancellor <nathan@kernel.org>
+To: Arnd Bergmann <arnd@kernel.org>
 List-Id: <soc.lore.kernel.org>
-Cc: soc@kernel.org,
-	Arnd Bergmann <arnd@arndb.de>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Nick Desaulniers <ndesaulniers@google.com>,
-	Mike Rapoport <rppt@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Chris Packham <chris.packham@alliedtelesis.co.nz>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-	linux-kernel@vger.kernel.org,
+Cc: Santosh Shilimkar <ssantosh@kernel.org>,
+	Nick Desaulniers <ndesaulniers@google.com>, soc@kernel.org,
+	Arnd Bergmann <arnd@arndb.de>, Russell King <linux@armlinux.org.uk>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Jim Quinlan <james.quinlan@broadcom.com>,
+	Maxime Ripard <maxime@cerno.tech>,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
 	clang-built-linux@googlegroups.com
-Subject: [PATCH] ARM: mvebu: avoid clang -Wtautological-constant warning
-Date: Tue, 23 Mar 2021 14:19:42 +0100
-Message-Id: <20210323131952.2835509-1-arnd@kernel.org>
-X-Mailer: git-send-email 2.29.2
+Subject: Re: [PATCH] ARM: keystone: fix integer overflow warning
+Message-ID: <20210323182436.5uxkjtgee3eoldvo@archlinux-ax161>
+References: <20210323131814.2751750-1-arnd@kernel.org>
 MIME-Version: 1.0
-X-Original-Sender: arnd@kernel.org
-X-Original-Authentication-Results: gmr-mx.google.com;       dkim=pass
- header.i=@kernel.org header.s=k20201202 header.b=iueD3kIy;       spf=pass
- (google.com: domain of arnd@kernel.org designates 198.145.29.99 as permitted
- sender) smtp.mailfrom=arnd@kernel.org;       dmarc=pass (p=NONE sp=NONE
- dis=NONE) header.from=kernel.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Disposition: inline
+In-Reply-To: <20210323131814.2751750-1-arnd@kernel.org>
+X-Original-Sender: nathan@kernel.org
+X-Original-Authentication-Results: gmr-mx.google.com;       dkim=pass
+ header.i=@kernel.org header.s=k20201202 header.b=ncRSA4f2;       spf=pass
+ (google.com: domain of nathan@kernel.org designates 198.145.29.99 as
+ permitted sender) smtp.mailfrom=nathan@kernel.org;       dmarc=pass (p=NONE
+ sp=NONE dis=NONE) header.from=kernel.org
 
-From: Arnd Bergmann <arnd@arndb.de>
+On Tue, Mar 23, 2021 at 02:18:05PM +0100, Arnd Bergmann wrote:
+> From: Arnd Bergmann <arnd@arndb.de>
+> 
+> clang warns about an impossible condition when building with 32-bit
+> phys_addr_t:
+> 
+> arch/arm/mach-keystone/keystone.c:79:16: error: result of comparison of constant 51539607551 with expression of type 'phys_addr_t' (aka 'unsigned int') is always false [-Werror,-Wtautological-constant-out-of-range-compare]
+>             mem_end   > KEYSTONE_HIGH_PHYS_END) {
+>             ~~~~~~~   ^ ~~~~~~~~~~~~~~~~~~~~~~
+> arch/arm/mach-keystone/keystone.c:78:16: error: result of comparison of constant 34359738368 with expression of type 'phys_addr_t' (aka 'unsigned int') is always true [-Werror,-Wtautological-constant-out-of-range-compare]
+>         if (mem_start < KEYSTONE_HIGH_PHYS_START ||
+>             ~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+> Change the temporary variable to a fixed-size u64 to avoid the warning.
+> 
+> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
 
-Clang warns about the comparison when using a 32-bit phys_addr_t:
+Reviewed-by: Nathan Chancellor <nathan@kernel.org>
 
-drivers/bus/mvebu-mbus.c:621:17: error: result of comparison of constant 4294967296 with expression of type 'phys_addr_t' (aka 'unsigned int') is always false [-Werror,-Wtautological-constant-out-of-range-compare]
-                if (reg_start >= 0x100000000ULL)
-
-Add a cast to shut up the warning.
-
-Signed-off-by: Arnd Bergmann <arnd@arndb.de>
----
- drivers/bus/mvebu-mbus.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/bus/mvebu-mbus.c b/drivers/bus/mvebu-mbus.c
-index dd9e7343a5e3..ea0424922de7 100644
---- a/drivers/bus/mvebu-mbus.c
-+++ b/drivers/bus/mvebu-mbus.c
-@@ -618,7 +618,7 @@ mvebu_mbus_find_bridge_hole(uint64_t *start, uint64_t *end)
- 		 * This part of the memory is above 4 GB, so we don't
- 		 * care for the MBus bridge hole.
- 		 */
--		if (reg_start >= 0x100000000ULL)
-+		if ((u64)reg_start >= 0x100000000ULL)
- 			continue;
- 
- 		/*
--- 
-2.29.2
+> ---
+>  arch/arm/mach-keystone/keystone.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/mach-keystone/keystone.c b/arch/arm/mach-keystone/keystone.c
+> index cd711bfc591f..2c647bdf8d25 100644
+> --- a/arch/arm/mach-keystone/keystone.c
+> +++ b/arch/arm/mach-keystone/keystone.c
+> @@ -65,7 +65,7 @@ static void __init keystone_init(void)
+>  static long long __init keystone_pv_fixup(void)
+>  {
+>  	long long offset;
+> -	phys_addr_t mem_start, mem_end;
+> +	u64 mem_start, mem_end;
+>  
+>  	mem_start = memblock_start_of_DRAM();
+>  	mem_end = memblock_end_of_DRAM();
+> @@ -78,7 +78,7 @@ static long long __init keystone_pv_fixup(void)
+>  	if (mem_start < KEYSTONE_HIGH_PHYS_START ||
+>  	    mem_end   > KEYSTONE_HIGH_PHYS_END) {
+>  		pr_crit("Invalid address space for memory (%08llx-%08llx)\n",
+> -		        (u64)mem_start, (u64)mem_end);
+> +		        mem_start, mem_end);
+>  		return 0;
+>  	}
+>  
+> -- 
+> 2.29.2
+> 
 
 -- 
 You received this message because you are subscribed to the Google Groups "Clang Built Linux" group.
 To unsubscribe from this group and stop receiving emails from it, send an email to clang-built-linux+unsubscribe@googlegroups.com.
-To view this discussion on the web visit https://groups.google.com/d/msgid/clang-built-linux/20210323131952.2835509-1-arnd%40kernel.org.
+To view this discussion on the web visit https://groups.google.com/d/msgid/clang-built-linux/20210323182436.5uxkjtgee3eoldvo%40archlinux-ax161.
