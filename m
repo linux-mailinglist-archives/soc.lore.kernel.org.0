@@ -1,150 +1,120 @@
-Return-Path: <clang-built-linux+bncBAABBZ7RUWEAMGQEYRLSD4Y@googlegroups.com>
-X-Original-To: lists+clang-built-linux@lfdr.de
-Delivered-To: lists+clang-built-linux@lfdr.de
-Received: from mail-pj1-x1040.google.com (mail-pj1-x1040.google.com [IPv6:2607:f8b0:4864:20::1040])
-	by mail.lfdr.de (Postfix) with ESMTPS id E72713DF3A6
-	for <lists+clang-built-linux@lfdr.de>; Tue,  3 Aug 2021 19:12:08 +0200 (CEST)
-Received: by mail-pj1-x1040.google.com with SMTP id j22-20020a17090a7e96b0290175fc969950sf3638435pjl.4
-        for <lists+clang-built-linux@lfdr.de>; Tue, 03 Aug 2021 10:12:08 -0700 (PDT)
-ARC-Seal: i=2; a=rsa-sha256; t=1628010727; cv=pass;
-        d=google.com; s=arc-20160816;
-        b=V3jQIaxXPZE1Kk416uSkEe0ZkBknidANUQ3E+usDTlsZqfB2UEaNTeB7jkwyeNEQux
-         J5V6CEpJYuKuu1hi1m+5+1HVxgSw8no31XD06M+dXc8kUPuX0tqmAxG6ZoMVmspxMMjT
-         NorMUk0XmQHflintv7YIkaIDA+7T6o0fRk3g3wiAqs8z9aH6c0jBmcYjCOuwTY8c38Wd
-         h4mF6ElI3VbTfJjNtPiTWfb26BKpDSMXmuo/7ri7yH+4p+W4TMonlF5x/8BX7JYsSdtH
-         kcXW6YhTqnIRuGowh6D/PJr+hSai5Xvu+7eqscUXSHFba0rwsANC6jH0uvFVZRNhj1zR
-         OkQw==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
-        h=cc:list-id:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:sender:dkim-signature;
-        bh=wMPMx236/MITMiGnVvncj4q3wp2ogTjk9vqRPN/qtUY=;
-        b=s+Wp9Yehz3UfZuJu0pdh0rcybQJlJ/c50Gn6wbkwTC289HnWcMypdM/1tA7YcPlsxq
-         aRNOkAtugL4xvaJGx1954A4tLufH6VPpdY+ZN5IhnwKUDIH372aVvRK8HKYWFnRufmLT
-         3o2c62K8phhFzbCk+x7YBnOrnGPVrouiWOjEimfkghfYOQtqjIntPeDweOKQXyoqa/YU
-         mUQ8hnj5YRdLCKABNgv12XN7HzGNQ/ktf+oaY10qCEum/TkDoXy91iXRJY/kQnTN0+A8
-         kZdI8+EIS+KkflQZplL6qklRTJs9+l7OCj+kqCWTrDKy/o0gd5fuvi+0l0TUn2rZ/85C
-         HvDg==
-ARC-Authentication-Results: i=2; gmr-mx.google.com;
-       dkim=pass header.i=@kernel.org header.s=k20201202 header.b=hEyoyKRH;
-       spf=pass (google.com: domain of arnd@kernel.org designates 198.145.29.99 as permitted sender) smtp.mailfrom=arnd@kernel.org;
-       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=kernel.org
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=googlegroups.com; s=20161025;
-        h=sender:mime-version:references:in-reply-to:from:date:message-id
-         :subject:to:list-id:cc:x-original-sender
-         :x-original-authentication-results;
-        bh=wMPMx236/MITMiGnVvncj4q3wp2ogTjk9vqRPN/qtUY=;
-        b=hn9ZeCcsm+mrmRTciLDzV9dVtDKsDwS+l7S+oNHPtxMvmrc1Dudx9Q1CVLB+sHspDI
-         S6/7SaNX+mUwklCB2cnLAJhF4viN00iMWvBX/e4d+sztSvXSrLlSseiImxleBAuRuA4P
-         70XQT94bR7eDvSIw5eYE1W6jAWD3Ey8etCShB++/y4UXQ3oi0vZCAlgR2qgdXKkScyb+
-         +N1fWDMbfBP6ZUjpIX8Z808n6K8Ea2P26fwaLivajTWKy/xafHz3eJFCazKK0K3G3jFf
-         jBZ+VuxNQmttcRosmBdUa7S0/oaS/tP5ueU7yUJM6RVNMYe1jL3X0A2GM9d6wZK2ZbAD
-         TF6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=sender:x-gm-message-state:mime-version:references:in-reply-to:from
-         :date:message-id:subject:to:list-id:cc:x-original-sender
-         :x-original-authentication-results;
-        bh=wMPMx236/MITMiGnVvncj4q3wp2ogTjk9vqRPN/qtUY=;
-        b=Tv8yydL4qfp4mlBEKe1K1BF0PMT+nnnQE8bf3FHEx8tFHY0FLt1qxY0X21omUPV5LL
-         8YuR9L5PoW2FmG/f951eipOp5FkPEJT26l6yxQHUxYMvo/CofXReYckQf0qHh4xdc8n2
-         4MTGbR0IvR7V6qsWNuUWkiG9QL6OCFRJeoKNzZVTJ9PRwfeo6pIL67sq5yJywBFMIcNF
-         e9bwPwHQuIwIFozxzir4+pWXZURJBucjvNF/yP3f+axXYNfgTVTdcF3J4PQevrjilyYE
-         VisQ53j7JWcWZZTvJbCcxm2cpZ+1HragSxXugN7epTczuP2DhCOjrH/W1FdZ1E86UOXH
-         OlZw==
-Sender: clang-built-linux@googlegroups.com
-X-Gm-Message-State: AOAM532MyIps8fcn8O//4NL8zZRg5ylQtQPeF6XfpYwfN+pl+ct4hg68
-	KM/WXQGKBl/rDtRlGmHduKk=
-X-Google-Smtp-Source: ABdhPJxs7dWT8gNw7Jq7v6h/BhuMlz6oFCnyV+mPi74NkY2nTfj0MXtbWxJEgOYrqMrRUL5dHp4c0Q==
-X-Received: by 2002:a17:902:8544:b029:12c:5752:b0ef with SMTP id d4-20020a1709028544b029012c5752b0efmr19421409plo.18.1628010727432;
-        Tue, 03 Aug 2021 10:12:07 -0700 (PDT)
-X-BeenThere: clang-built-linux@googlegroups.com
-Received: by 2002:a17:902:76c5:: with SMTP id j5ls7331256plt.7.gmail; Tue, 03
- Aug 2021 10:12:07 -0700 (PDT)
-X-Received: by 2002:a17:902:dac1:b029:12c:61a8:1f4a with SMTP id q1-20020a170902dac1b029012c61a81f4amr19117207plx.37.1628010726940;
-        Tue, 03 Aug 2021 10:12:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1628010726; cv=none;
-        d=google.com; s=arc-20160816;
-        b=Goyl2wDSd4ut9ZxAYEehrc/VUeiUN65TQeDb8SJW9MpKnj9WNIKnQi561okiIUxPf7
-         O1WMMUTE2sk1wf/Ke/wX5ioaTvB+BbsMMteq6uhq2uaHL6TCqCm5XSJ/qsJ2rX1vNmg6
-         tSeHcsQ8TrHsKBnH/fJEvT4Ruh+OAKrrqD1zm552lCe97oZYrRoyc7wkVKv9xU5mrIkg
-         WW22FuGN3gDxZwBjWK4i/UPEPBB6f+UbSnBM+iimZK4KvIBVRfIGFyiS8P0VEkOdOhJc
-         oin9eUdoKnbyM0gO7ADcawtQJ4pXHWATEWD08qKcV7wH44E+qGCZCKHJrXrWa7Ku4t/4
-         Nh7Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
-        h=cc:list-id:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=dBoXpdjLPyE3+ytmougN6kKfRsPMrU1RgLSWS/GgIlQ=;
-        b=qmYsCDZ4y+I8kXMQFtTDCqpSLkuGrlrIsmed2jg6AeZ0xzwD57hxi3dYQ/2KiXmyJO
-         IIK+ObhOJbmGV77JNSCSgpfTWCX0X1/2exvy8h32vN1WsX0yE7w2VKiLS6Yz9m8mhgM8
-         S+aStbS+l8j6eei0IssRUNkbOoNelEalypZa1vTSTUH0tyIJEpGDVUNiSYdlgcU0ck8S
-         0KjtUn60gFZsKjaqPwAtx9tetnZeE6riClMppokIHngFd4X4p1GNni5eXixhIZQB+sEI
-         GLFB7VdB7LrwVhhkCUv1lAtokpH6hW/gvcvrzA3bjixnNBDPbtN+H+rJwdL3kQq8NTMb
-         DOvw==
-ARC-Authentication-Results: i=1; gmr-mx.google.com;
-       dkim=pass header.i=@kernel.org header.s=k20201202 header.b=hEyoyKRH;
-       spf=pass (google.com: domain of arnd@kernel.org designates 198.145.29.99 as permitted sender) smtp.mailfrom=arnd@kernel.org;
-       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=kernel.org
-Received: from mail.kernel.org (mail.kernel.org. [198.145.29.99])
-        by gmr-mx.google.com with ESMTPS id e1si917748pgk.0.2021.08.03.10.12.06
-        for <clang-built-linux@googlegroups.com>
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 03 Aug 2021 10:12:06 -0700 (PDT)
-Received-SPF: pass (google.com: domain of arnd@kernel.org designates 198.145.29.99 as permitted sender) client-ip=198.145.29.99;
-Received: by mail.kernel.org (Postfix) with ESMTPSA id A5F26610FD
-	for <clang-built-linux@googlegroups.com>; Tue,  3 Aug 2021 17:12:06 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id n12-20020a05600c3b8cb029025a67bbd40aso2225960wms.0
-        for <clang-built-linux@googlegroups.com>; Tue, 03 Aug 2021 10:12:06 -0700 (PDT)
-X-Received: by 2002:a1c:208e:: with SMTP id g136mr5372161wmg.142.1628010725128;
- Tue, 03 Aug 2021 10:12:05 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210802141245.1146772-1-arnd@kernel.org> <CAL4-wQqCL1S-GYu7VKJeTT37wh=rR=SMUuwgKiXnnn_Y=uydOA@mail.gmail.com>
- <CAL4-wQpKLtSj0xfNUXXLhbtN1wC051jpRneAuLYOi1riZfiinw@mail.gmail.com>
- <CAK8P3a2z_xxpz9hAYoBx5=bS81V=TkjEU6WHNhPi1UhQ3UScfw@mail.gmail.com> <817752520.64672.1628005929651.JavaMail.zimbra@savoirfairelinux.com>
-In-Reply-To: <817752520.64672.1628005929651.JavaMail.zimbra@savoirfairelinux.com>
-From: Arnd Bergmann <arnd@kernel.org>
-Date: Tue, 3 Aug 2021 19:11:49 +0200
-X-Gmail-Original-Message-ID: <CAK8P3a042r2V10WY=M3mvhZS2Q9_iBHLDgSNzJpJEGgNJOD7zQ@mail.gmail.com>
-Message-ID: <CAK8P3a042r2V10WY=M3mvhZS2Q9_iBHLDgSNzJpJEGgNJOD7zQ@mail.gmail.com>
-Subject: Re: [PATCH] ARM: ep93xx: remove MaverickCrunch support
-To: Jerome Oufella <jerome.oufella@savoirfairelinux.com>
+Return-Path: <netdev+bounces-13633-lists+netdev=lfdr.de@vger.kernel.org>
+X-Original-To: lists+netdev@lfdr.de
+Delivered-To: lists+netdev@lfdr.de
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D25673C59D
+	for <lists+netdev@lfdr.de>; Sat, 24 Jun 2023 02:53:00 +0200 (CEST)
+Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 337C1281EB9
+	for <lists+netdev@lfdr.de>; Sat, 24 Jun 2023 00:52:59 +0000 (UTC)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6B677379;
+	Sat, 24 Jun 2023 00:52:57 +0000 (UTC)
+X-Original-To: netdev@vger.kernel.org
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24749378
+	for <netdev@vger.kernel.org>; Sat, 24 Jun 2023 00:52:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 728B1C433C0;
+	Sat, 24 Jun 2023 00:52:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1687567970;
+	bh=r/EW6obxSAVNNGjwUGkGRU+SWh5nEHChw4jIkdrVMyk=;
+	h=From:List-Id:To:Cc:In-Reply-To:References:Subject:Date:From;
+	b=dSOKhy79sEB2zIN2c8ajaVofGMArO0Go+fWumUQL9gmmkAU3QnfwbPH7w9WAaAOOZ
+	 w2GYaOr0xjKNeW8QA4o905lF5G9oX5k83Z7NVNVK0BRDZOe0gr7KK1bn3S+/TZ4fA2
+	 utNavE4sqCzZkKo0lfmhyMQzNQjXWTcX5MAmp82m8t11shclN2Cy3B6Il2KRsjJqa1
+	 L6tvmcwX8j5bfsy21mp78UvjksdnPTlXaMUpDMhWKk+uAqGmyUEFF2mtf7Z8p2Q1XR
+	 bRoAQou336boKyaD+3RQxZDzBKli+QkQJk1AGEeapc1CUwRC7l8k9a+I5g79sPTr29
+	 PSjHxExxu4Q+w==
+From: Mark Brown <broonie@kernel.org>
 List-Id: <soc.lore.kernel.org>
-Cc: martinwguy <martinwguy@gmail.com>, Russell King <linux@armlinux.org.uk>, 
-	Hartley Sweeten <hsweeten@visionengravers.com>, 
-	Alexander Sverdlin <alexander.sverdlin@gmail.com>, SoC Team <soc@kernel.org>, 
-	Nikita Shubin <nikita.shubin@maquefel.me>, Arnd Bergmann <arnd@arndb.de>, 
-	Oleg Nesterov <oleg@redhat.com>, Hubert Feurstein <hubert.feurstein@contec.at>, 
-	Lukasz Majewski <lukma@denx.de>, Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, 
-	Nathan Chancellor <nathan@kernel.org>, Nick Desaulniers <ndesaulniers@google.com>, 
-	Linus Walleij <linus.walleij@linaro.org>, Linux ARM <linux-arm-kernel@lists.infradead.org>, 
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, 
-	clang-built-linux <clang-built-linux@googlegroups.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Original-Sender: arnd@kernel.org
-X-Original-Authentication-Results: gmr-mx.google.com;       dkim=pass
- header.i=@kernel.org header.s=k20201202 header.b=hEyoyKRH;       spf=pass
- (google.com: domain of arnd@kernel.org designates 198.145.29.99 as permitted
- sender) smtp.mailfrom=arnd@kernel.org;       dmarc=pass (p=NONE sp=NONE
- dis=NONE) header.from=kernel.org
+To: robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, 
+ conor+dt@kernel.org, nicolas.ferre@microchip.com, 
+ alexandre.belloni@bootlin.com, claudiu.beznea@microchip.com, 
+ mturquette@baylibre.com, sboyd@kernel.org, herbert@gondor.apana.org.au, 
+ davem@davemloft.net, vkoul@kernel.org, tglx@linutronix.de, maz@kernel.org, 
+ lee@kernel.org, ulf.hansson@linaro.org, tudor.ambarus@linaro.org, 
+ miquel.raynal@bootlin.com, richard@nod.at, vigneshr@ti.com, 
+ edumazet@google.com, kuba@kernel.org, pabeni@redhat.com, 
+ linus.walleij@linaro.org, p.zabel@pengutronix.de, olivia@selenic.com, 
+ a.zummo@towertech.it, radu_nicolae.pirea@upb.ro, richard.genoud@gmail.com, 
+ gregkh@linuxfoundation.org, lgirdwood@gmail.com, wim@linux-watchdog.org, 
+ linux@roeck-us.net, arnd@arndb.de, olof@lixom.net, soc@kernel.org, 
+ linux@armlinux.org.uk, sre@kernel.org, jerry.ray@microchip.com, 
+ horatiu.vultur@microchip.com, durai.manickamkr@microchip.com, 
+ andrew@lunn.ch, alain.volmat@foss.st.com, neil.armstrong@linaro.org, 
+ mihai.sain@microchip.com, eugen.hristev@collabora.com, 
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-kernel@vger.kernel.org, linux-clk@vger.kernel.org, 
+ linux-crypto@vger.kernel.org, dmaengine@vger.kernel.org, 
+ linux-i2c@vger.kernel.org, linux-mmc@vger.kernel.org, 
+ linux-mtd@lists.infradead.org, netdev@vger.kernel.org, 
+ linux-gpio@vger.kernel.org, linux-rtc@vger.kernel.org, 
+ linux-spi@vger.kernel.org, linux-serial@vger.kernel.org, 
+ alsa-devel@alsa-project.org, linux-usb@vger.kernel.org, 
+ linux-watchdog@vger.kernel.org, linux-pm@vger.kernel.org, 
+ Varshini Rajendran <varshini.rajendran@microchip.com>
+Cc: Hari.PrasathGE@microchip.com, cristian.birsan@microchip.com, 
+ balamanikandan.gunasundar@microchip.com, manikandan.m@microchip.com, 
+ dharma.b@microchip.com, nayabbasha.sayed@microchip.com, 
+ balakrishnan.s@microchip.com
+In-Reply-To: <20230623203056.689705-1-varshini.rajendran@microchip.com>
+References: <20230623203056.689705-1-varshini.rajendran@microchip.com>
+Subject: Re: (subset) [PATCH v2 00/45] Add support for sam9x7 SoC family
+Message-Id: <168756794811.1155588.11719780333735420720.b4-ty@kernel.org>
+Date: Sat, 24 Jun 2023 01:52:28 +0100
+Precedence: bulk
+X-Mailing-List: netdev@vger.kernel.org
+List-Id: <netdev.vger.kernel.org>
+List-Subscribe: <mailto:netdev+subscribe@vger.kernel.org>
+List-Unsubscribe: <mailto:netdev+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13-dev-c6835
 
-On Tue, Aug 3, 2021 at 5:52 PM Jerome Oufella
-<jerome.oufella@savoirfairelinux.com> wrote:
->
-> You are correct on assuming usage of softfloat toolchains and not
-> using the MaverickCrunch unit. AFAIK, I am not aware of active users
-> of this FPU on recent setups.
+On Sat, 24 Jun 2023 02:00:11 +0530, Varshini Rajendran wrote:
+> This patch series adds support for the new SoC family - sam9x7.
+>  - The device tree, configs and drivers are added
+>  - Clock driver for sam9x7 is added
+>  - Support for basic peripherals is added
+>  - Target board SAM9X75 Curiosity is added
+> 
+>  Changes in v2:
+>  --------------
+> 
+> [...]
 
-Ok, thank you for the confirmation, I'll queue it up in the soc tree then.
+Applied to
 
-Of course, as there is nothing wrong with the feature other than it
-probably having no users and breaking the build when using the
-clang integrated assembler, I don't mind reverting it later if we end
-up finding a user that does rely on ancient MaverickCrunch binaries
-to run on future kernels.
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/spi.git for-next
 
-       Arnd
+Thanks!
 
--- 
-You received this message because you are subscribed to the Google Groups "Clang Built Linux" group.
-To unsubscribe from this group and stop receiving emails from it, send an email to clang-built-linux+unsubscribe@googlegroups.com.
-To view this discussion on the web visit https://groups.google.com/d/msgid/clang-built-linux/CAK8P3a042r2V10WY%3DM3mvhZS2Q9_iBHLDgSNzJpJEGgNJOD7zQ%40mail.gmail.com.
+[32/45] spi: dt-bindings: atmel,at91rm9200-spi: add sam9x7 compatible
+        commit: a3eb95484f276488e3d59cffa8eec29f79be416e
+
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
+
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
+
+
