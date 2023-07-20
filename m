@@ -1,120 +1,128 @@
-Return-Path: <netdev+bounces-13633-lists+netdev=lfdr.de@vger.kernel.org>
+Return-Path: <netdev+bounces-19497-lists+netdev=lfdr.de@vger.kernel.org>
 X-Original-To: lists+netdev@lfdr.de
 Delivered-To: lists+netdev@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D25673C59D
-	for <lists+netdev@lfdr.de>; Sat, 24 Jun 2023 02:53:00 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 600EE75AE83
+	for <lists+netdev@lfdr.de>; Thu, 20 Jul 2023 14:36:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 337C1281EB9
-	for <lists+netdev@lfdr.de>; Sat, 24 Jun 2023 00:52:59 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 49E041C21447
+	for <lists+netdev@lfdr.de>; Thu, 20 Jul 2023 12:36:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6B677379;
-	Sat, 24 Jun 2023 00:52:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9443C19A0A;
+	Thu, 20 Jul 2023 12:36:20 +0000 (UTC)
 X-Original-To: netdev@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24749378
-	for <netdev@vger.kernel.org>; Sat, 24 Jun 2023 00:52:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 728B1C433C0;
-	Sat, 24 Jun 2023 00:52:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24866199EC
+	for <netdev@vger.kernel.org>; Thu, 20 Jul 2023 12:36:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34E69C433C7;
+	Thu, 20 Jul 2023 12:36:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1687567970;
-	bh=r/EW6obxSAVNNGjwUGkGRU+SWh5nEHChw4jIkdrVMyk=;
-	h=From:List-Id:To:Cc:In-Reply-To:References:Subject:Date:From;
-	b=dSOKhy79sEB2zIN2c8ajaVofGMArO0Go+fWumUQL9gmmkAU3QnfwbPH7w9WAaAOOZ
-	 w2GYaOr0xjKNeW8QA4o905lF5G9oX5k83Z7NVNVK0BRDZOe0gr7KK1bn3S+/TZ4fA2
-	 utNavE4sqCzZkKo0lfmhyMQzNQjXWTcX5MAmp82m8t11shclN2Cy3B6Il2KRsjJqa1
-	 L6tvmcwX8j5bfsy21mp78UvjksdnPTlXaMUpDMhWKk+uAqGmyUEFF2mtf7Z8p2Q1XR
-	 bRoAQou336boKyaD+3RQxZDzBKli+QkQJk1AGEeapc1CUwRC7l8k9a+I5g79sPTr29
-	 PSjHxExxu4Q+w==
+	s=k20201202; t=1689856578;
+	bh=tx4bjwgSSJSb6YT5+Vwiw5cr91ahSeHGqQoHPOhKX8c=;
+	h=Date:From:To:List-Id:Cc:Subject:References:In-Reply-To:From;
+	b=OxsinWvIFF5gSYzeC9nprmcJnexZ2+pzRTEtCPGSDVXBXTxmtyD8J6cScmlKDK3cB
+	 5yE1supJc9fsWZHybibJENoDpuz2+JtJq0G0/o1M9H5vusZ/mbBNE89kmITtLNWiUv
+	 VoYJp6D/sT5jvqV22YqlSQtVCg1Ds1tBAbxEP0qahLvXW+mcnCR+r5IZSf1AolV+A8
+	 TLA3CjFa77OdSPos2Qg4O1B7BjDbMZaGdV7iiw3FoGeIJWPra6iLOe3D7hFUktjPhd
+	 pswJWK5/sxEEqZ7EFzaPyQhlO+ROBbnAN36OJeucLXcjKaVy7Z0N1/uAdQi0D9efa3
+	 FUZwjDuSIiyQw==
+Date: Thu, 20 Jul 2023 13:36:01 +0100
 From: Mark Brown <broonie@kernel.org>
+To: nikita.shubin@maquefel.me
 List-Id: <soc.lore.kernel.org>
-To: robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, 
- conor+dt@kernel.org, nicolas.ferre@microchip.com, 
- alexandre.belloni@bootlin.com, claudiu.beznea@microchip.com, 
- mturquette@baylibre.com, sboyd@kernel.org, herbert@gondor.apana.org.au, 
- davem@davemloft.net, vkoul@kernel.org, tglx@linutronix.de, maz@kernel.org, 
- lee@kernel.org, ulf.hansson@linaro.org, tudor.ambarus@linaro.org, 
- miquel.raynal@bootlin.com, richard@nod.at, vigneshr@ti.com, 
- edumazet@google.com, kuba@kernel.org, pabeni@redhat.com, 
- linus.walleij@linaro.org, p.zabel@pengutronix.de, olivia@selenic.com, 
- a.zummo@towertech.it, radu_nicolae.pirea@upb.ro, richard.genoud@gmail.com, 
- gregkh@linuxfoundation.org, lgirdwood@gmail.com, wim@linux-watchdog.org, 
- linux@roeck-us.net, arnd@arndb.de, olof@lixom.net, soc@kernel.org, 
- linux@armlinux.org.uk, sre@kernel.org, jerry.ray@microchip.com, 
- horatiu.vultur@microchip.com, durai.manickamkr@microchip.com, 
- andrew@lunn.ch, alain.volmat@foss.st.com, neil.armstrong@linaro.org, 
- mihai.sain@microchip.com, eugen.hristev@collabora.com, 
- devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-kernel@vger.kernel.org, linux-clk@vger.kernel.org, 
- linux-crypto@vger.kernel.org, dmaengine@vger.kernel.org, 
- linux-i2c@vger.kernel.org, linux-mmc@vger.kernel.org, 
- linux-mtd@lists.infradead.org, netdev@vger.kernel.org, 
- linux-gpio@vger.kernel.org, linux-rtc@vger.kernel.org, 
- linux-spi@vger.kernel.org, linux-serial@vger.kernel.org, 
- alsa-devel@alsa-project.org, linux-usb@vger.kernel.org, 
- linux-watchdog@vger.kernel.org, linux-pm@vger.kernel.org, 
- Varshini Rajendran <varshini.rajendran@microchip.com>
-Cc: Hari.PrasathGE@microchip.com, cristian.birsan@microchip.com, 
- balamanikandan.gunasundar@microchip.com, manikandan.m@microchip.com, 
- dharma.b@microchip.com, nayabbasha.sayed@microchip.com, 
- balakrishnan.s@microchip.com
-In-Reply-To: <20230623203056.689705-1-varshini.rajendran@microchip.com>
-References: <20230623203056.689705-1-varshini.rajendran@microchip.com>
-Subject: Re: (subset) [PATCH v2 00/45] Add support for sam9x7 SoC family
-Message-Id: <168756794811.1155588.11719780333735420720.b4-ty@kernel.org>
-Date: Sat, 24 Jun 2023 01:52:28 +0100
+Cc: Hartley Sweeten <hsweeten@visionengravers.com>,
+	Lennert Buytenhek <kernel@wantstofly.org>,
+	Alexander Sverdlin <alexander.sverdlin@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Lukasz Majewski <lukma@denx.de>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Bartosz Golaszewski <brgl@bgdev.pl>,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@linaro.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Alessandro Zummo <a.zummo@towertech.it>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Sebastian Reichel <sre@kernel.org>,
+	Thierry Reding <thierry.reding@gmail.com>,
+	Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@pengutronix.de>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Miquel Raynal <miquel.raynal@bootlin.com>,
+	Richard Weinberger <richard@nod.at>,
+	Vignesh Raghavendra <vigneshr@ti.com>,
+	Damien Le Moal <dlemoal@kernel.org>,
+	Sergey Shtylyov <s.shtylyov@omp.ru>,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Arnd Bergmann <arnd@arndb.de>, Olof Johansson <olof@lixom.net>,
+	soc@kernel.org, Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Michael Peters <mpeters@embeddedts.com>,
+	Kris Bahnsen <kris@embeddedts.com>,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+	linux-gpio@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-rtc@vger.kernel.org,
+	linux-watchdog@vger.kernel.org, linux-pm@vger.kernel.org,
+	linux-pwm@vger.kernel.org, linux-spi@vger.kernel.org,
+	netdev@vger.kernel.org, dmaengine@vger.kernel.org,
+	linux-mtd@lists.infradead.org, linux-ide@vger.kernel.org,
+	linux-input@vger.kernel.org, alsa-devel@alsa-project.org
+Subject: Re: [PATCH v3 42/42] ASoC: cirrus: edb93xx: Delete driver
+Message-ID: <d77bee81-190a-4aa2-98ac-8da3a9801b50@sirena.org.uk>
+References: <20230605-ep93xx-v3-0-3d63a5f1103e@maquefel.me>
+ <20230605-ep93xx-v3-42-3d63a5f1103e@maquefel.me>
 Precedence: bulk
 X-Mailing-List: netdev@vger.kernel.org
 List-Id: <netdev.vger.kernel.org>
 List-Subscribe: <mailto:netdev+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:netdev+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13-dev-c6835
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="5GyV5EkRHy37I+rH"
+Content-Disposition: inline
+In-Reply-To: <20230605-ep93xx-v3-42-3d63a5f1103e@maquefel.me>
+X-Cookie: Ginger snap.
 
-On Sat, 24 Jun 2023 02:00:11 +0530, Varshini Rajendran wrote:
-> This patch series adds support for the new SoC family - sam9x7.
->  - The device tree, configs and drivers are added
->  - Clock driver for sam9x7 is added
->  - Support for basic peripherals is added
->  - Target board SAM9X75 Curiosity is added
-> 
->  Changes in v2:
->  --------------
-> 
-> [...]
 
-Applied to
+--5GyV5EkRHy37I+rH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/spi.git for-next
+On Thu, Jul 20, 2023 at 02:29:42PM +0300, Nikita Shubin via B4 Relay wrote:
+> From: Alexander Sverdlin <alexander.sverdlin@gmail.com>
+>=20
+> Can be replaced with "simple-audio-card" for the rates up to 50kHz, refer
+> to commit "ARM: dts: ep93xx: Add EDB9302 DT".
 
-Thanks!
+Acked-by: Mark Brown <broonie@kernel.org>
 
-[32/45] spi: dt-bindings: atmel,at91rm9200-spi: add sam9x7 compatible
-        commit: a3eb95484f276488e3d59cffa8eec29f79be416e
+--5GyV5EkRHy37I+rH
+Content-Type: application/pgp-signature; name="signature.asc"
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
+-----BEGIN PGP SIGNATURE-----
 
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmS5KjEACgkQJNaLcl1U
+h9B6aQf/XDtbT4LN4vU9F6keDfckOFzxaWiUcy57r8jPcwHJg8vCxhKWHLrclREk
+XH6ynZJ84wMW6ghI1RW3NJ06CVhs/KPzBcZ30la2LplfkeaUXMcB6Gh7C3NSzzkZ
+47MAW/Y4HgC8BFFwixdr6vcqulgad7GD8AZcJq0FfaRSuv0OBYpicItwd2Hjxyev
+yx3wdBDRiwxBn4FdFOd1KU3fnLZbvVBEmrF54V5z8AM3nkN+u0tSyAHyoaEMNQ+N
+bBbcQi0/TIdD0ktmis2z41SHRJJUpLB65MWk6Kjs92gE9GS7g4m3LJrDtrm/FqVT
+81KRIgPAl1ZTlDxAZhUIyTGU9MecZw==
+=aMu7
+-----END PGP SIGNATURE-----
 
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
-
+--5GyV5EkRHy37I+rH--
 
