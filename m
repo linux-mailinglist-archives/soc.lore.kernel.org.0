@@ -1,157 +1,180 @@
-Return-Path: <devicetree+bounces-1350-lists+devicetree=lfdr.de@vger.kernel.org>
+Return-Path: <devicetree+bounces-1478-lists+devicetree=lfdr.de@vger.kernel.org>
 X-Original-To: lists+devicetree@lfdr.de
 Delivered-To: lists+devicetree@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id C406B7A5FC8
-	for <lists+devicetree@lfdr.de>; Tue, 19 Sep 2023 12:38:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C69417A6853
+	for <lists+devicetree@lfdr.de>; Tue, 19 Sep 2023 17:48:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7DCCE2818C8
-	for <lists+devicetree@lfdr.de>; Tue, 19 Sep 2023 10:38:30 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 805CE28119F
+	for <lists+devicetree@lfdr.de>; Tue, 19 Sep 2023 15:48:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7A04C15A6;
-	Tue, 19 Sep 2023 10:38:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9540E374EE;
+	Tue, 19 Sep 2023 15:48:40 +0000 (UTC)
 X-Original-To: devicetree@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C1B418626
-	for <devicetree@vger.kernel.org>; Tue, 19 Sep 2023 10:38:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97B7CC433CA;
-	Tue, 19 Sep 2023 10:38:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C21C3717C;
+	Tue, 19 Sep 2023 15:48:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBD44C433C8;
+	Tue, 19 Sep 2023 15:48:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1695119904;
-	bh=swvVFukccPqJGxQrKUpkJjYso7DWDU37lrPcTgRg/AM=;
-	h=From:List-Id:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=SzRUF8O8gPio45Wixo0+iiHFf2OX33tEFdemRV0Z/zJVzE4uBQny9htGs23ZsQn+f
-	 QKH3V+fVH2lJthxzyjQ3HRFYpI5vZeerwi7vpyVsYRFSuqS90K3Kw2fSLOcQ4Vu7kS
-	 jbYPwZuczsnG5h3TxR0bu14TCb5C2zV+xwlJPDJfgFX2l4DZ5yZ2a4dzCe7wgOINly
-	 o04nxMIf78j2E9+NEZgtDxYfpDv5e0gdyROhZjectuH3HvwEELnKq63h1fT477/6cb
-	 x/26qQVjIRieYphE8FjEkGE/A/VDZyZ1oX7jWvcb2fY2cHGLvORymknqioC9Q6mPFS
-	 v/HaxZDQOFjYQ==
-From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
+	s=k20201202; t=1695138520;
+	bh=YMEj73REI1J6u0MY5w+tGzdmS4rNaNnduItLCa1dOts=;
+	h=Date:From:To:List-Id:Cc:Subject:References:In-Reply-To:From;
+	b=sYq30tepoj+a11qJWgfcbXS96cvQhIhJjGEsH/TFIk3mIZyMU3YYX2XvkQ/ArdbR8
+	 MzGYrS8YeM+/7tPvIAh166EidCKOgkZkrIlPPhIrxAsYxdBJ2lHUv+71t4+NBrSLMU
+	 NT/OrxW1k0xSq756KaCShLkPYV4Kk5rEtPViW+1ibz37jZCLKW77J9qHhum+yU7G48
+	 cPfgvkWzLtP48/OL6SsKupPfc9NtFnJ5JO6r5g91pviFXxm8ZRftKSvHZH+BuniDaq
+	 UzEoROLt2xc5HArvfN5zwQH/v93aHlMKXxhaxB9fsAiGOE6uki2nKJyZE5K56HpcQ1
+	 cjfCN+JkAroQA==
+Date: Tue, 19 Sep 2023 16:48:34 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Randy Dunlap <rdunlap@infradead.org>
 List-Id: <soc.lore.kernel.org>
-To: Gregory CLEMENT <gregory.clement@bootlin.com>,
-	Arnd Bergmann <arnd@arndb.de>,
-	soc@kernel.org,
-	arm@kernel.org,
+Cc: Binbin Zhou <zhoubinbin@loongson.cn>,
+	Binbin Zhou <zhoubb.aaron@gmail.com>,
+	Huacai Chen <chenhuacai@loongson.cn>,
+	Yinbo Zhu <zhuyinbo@loongson.cn>, Arnd Bergmann <arnd@arndb.de>,
 	Rob Herring <robh+dt@kernel.org>,
 	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-	devicetree@vger.kernel.org
-Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH v2 1/7] dt-bindings: arm: add cznic,turris-omnia-mcu binding
-Date: Tue, 19 Sep 2023 12:38:09 +0200
-Message-ID: <20230919103815.16818-2-kabel@kernel.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230919103815.16818-1-kabel@kernel.org>
-References: <20230919103815.16818-1-kabel@kernel.org>
+	Conor Dooley <conor+dt@kernel.org>,
+	Huacai Chen <chenhuacai@kernel.org>,
+	loongson-kernel@lists.loongnix.cn, soc@kernel.org,
+	devicetree@vger.kernel.org, linux-pm@vger.kernel.org,
+	Xuerui Wang <kernel@xen0n.name>, loongarch@lists.linux.dev
+Subject: Re: [PATCH v3 1/5] soc: loongson: loongson2_pm: Add dependency for
+ INPUT
+Message-ID: <20230919-9ce82588fccdd641574b468c@fedora>
+References: <cover.1693623752.git.zhoubinbin@loongson.cn>
+ <16a37f6ad3cc9417b6638c2cd532d88c79468eb1.1693623752.git.zhoubinbin@loongson.cn>
+ <885eab85-2c11-cf20-9187-55cd647fbe9f@infradead.org>
+ <c7604f6c-4da7-47c4-abe9-e626b3efc665@infradead.org>
 Precedence: bulk
 X-Mailing-List: devicetree@vger.kernel.org
 List-Id: <devicetree.vger.kernel.org>
 List-Subscribe: <mailto:devicetree+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="t2Nc9cLRgLLRvvZk"
+Content-Disposition: inline
+In-Reply-To: <c7604f6c-4da7-47c4-abe9-e626b3efc665@infradead.org>
 
-Add binding for cznic,turris-omnia-mcu, the device-tree node
-representing the system-controller features provided by the MCU on the
-Turris Omnia router.
 
-Signed-off-by: Marek Behún <kabel@kernel.org>
----
- .../bindings/arm/cznic,turris-omnia-mcu.yaml  | 67 +++++++++++++++++++
- MAINTAINERS                                   |  1 +
- 2 files changed, 68 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/arm/cznic,turris-omnia-mcu.yaml
+--t2Nc9cLRgLLRvvZk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/Documentation/devicetree/bindings/arm/cznic,turris-omnia-mcu.yaml b/Documentation/devicetree/bindings/arm/cznic,turris-omnia-mcu.yaml
-new file mode 100644
-index 000000000000..ea1fd0117bb8
---- /dev/null
-+++ b/Documentation/devicetree/bindings/arm/cznic,turris-omnia-mcu.yaml
-@@ -0,0 +1,67 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/arm/cznic,turris-omnia-mcu.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: CZ.NIC's Turris Omnia MCU
-+
-+maintainers:
-+  - Marek Behún <kabel@kernel.org>
-+
-+description:
-+  The MCU on Turris Omnia acts as a system controller providing additional
-+  GPIOs, interrupts, watchdog, system power off and wakeup configuration.
-+
-+properties:
-+  compatible:
-+    const: cznic,turris-omnia-mcu
-+
-+  reg:
-+    description: MCU I2C slave address
-+    maxItems: 1
-+
-+  interrupts:
-+    maxItems: 1
-+
-+  interrupt-controller: true
-+
-+  '#interrupt-cells':
-+    const: 2
-+
-+  gpio-controller: true
-+
-+  '#gpio-cells':
-+    const: 2
-+
-+required:
-+  - compatible
-+  - reg
-+  - interrupts
-+  - interrupt-controller
-+  - gpio-controller
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/interrupt-controller/irq.h>
-+
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        system-controller@2a {
-+            compatible = "cznic,turris-omnia-mcu";
-+            reg = <0x2a>;
-+
-+            interrupt-parent = <&gpio1>;
-+            interrupts = <11 IRQ_TYPE_NONE>;
-+
-+            gpio-controller;
-+            #gpio-cells = <2>;
-+
-+            interrupt-controller;
-+            #interrupt-cells = <2>;
-+        };
-+    };
-diff --git a/MAINTAINERS b/MAINTAINERS
-index bf0f54c24f81..0a4d7d6ed63a 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2091,6 +2091,7 @@ W:	https://www.turris.cz/
- F:	Documentation/ABI/testing/debugfs-moxtet
- F:	Documentation/ABI/testing/sysfs-bus-moxtet-devices
- F:	Documentation/ABI/testing/sysfs-firmware-turris-mox-rwtm
-+F:	Documentation/devicetree/bindings/arm/cznic,turris-omnia-mcu.yaml
- F:	Documentation/devicetree/bindings/bus/moxtet.txt
- F:	Documentation/devicetree/bindings/firmware/cznic,turris-mox-rwtm.txt
- F:	Documentation/devicetree/bindings/gpio/gpio-moxtet.txt
--- 
-2.41.0
+On Tue, Sep 19, 2023 at 08:36:50AM -0700, Randy Dunlap wrote:
+> Hi--
+>=20
+> On 9/2/23 08:43, Randy Dunlap wrote:
+> >=20
+> >=20
+> > On 9/2/23 01:47, Binbin Zhou wrote:
+> >> Since commit 67694c076bd7 ("soc: loongson2_pm: add power management
+> >> support"), the Loongson-2K PM driver was added, but it didn't update t=
+he
+> >> Kconfig entry for the INPUT dependency, leading to build errors:
+> >>
+> >> /opt/crosstool/gcc-13.2.0-nolibc/loongarch64-linux/bin/loongarch64-lin=
+ux-ld:
+> >> drivers/soc/loongson/loongson2_pm.o: in function `loongson2_power_butt=
+on_init':
+> >> /work/lnx/next/linux-next-20230825/LOONG64/../drivers/soc/loongson/loo=
+ngson2_pm.c:101:(.text+0x350): undefined reference to `input_allocate_devic=
+e'
+> >> /opt/crosstool/gcc-13.2.0-nolibc/loongarch64-linux/bin/loongarch64-lin=
+ux-ld:
+> >> /work/lnx/next/linux-next-20230825/LOONG64/../drivers/soc/loongson/loo=
+ngson2_pm.c:109:(.text+0x3dc): undefined reference to `input_set_capability'
+> >> /opt/crosstool/gcc-13.2.0-nolibc/loongarch64-linux/bin/loongarch64-lin=
+ux-ld:
+> >> /work/lnx/next/linux-next-20230825/LOONG64/../drivers/soc/loongson/loo=
+ngson2_pm.c:111:(.text+0x3e4): undefined reference to `input_register_devic=
+e'
+> >> /opt/crosstool/gcc-13.2.0-nolibc/loongarch64-linux/bin/loongarch64-lin=
+ux-ld:
+> >> /work/lnx/next/linux-next-20230825/LOONG64/../drivers/soc/loongson/loo=
+ngson2_pm.c:125:(.text+0x3fc): undefined reference to `input_free_device'
+> >> /opt/crosstool/gcc-13.2.0-nolibc/loongarch64-linux/bin/loongarch64-lin=
+ux-ld: drivers/soc/loongson/loongson2_pm.o: in function `input_report_key':
+> >> /work/lnx/next/linux-next-20230825/LOONG64/../include/linux/input.h:42=
+5:(.text+0x58c): undefined reference to `input_event'
+> >>
+> >> Also, since this driver can only be built-in, it fails to link when the
+> >> INPUT is in a loadable module, so we should update the Kconfig entry to
+> >> depend on INPUT=3Dy.
+> >>
+> >> Fixes: 67694c076bd7 ("soc: loongson2_pm: add power management support")
+> >> Reported-by: Randy Dunlap <rdunlap@infradead.org>
+> >> Signed-off-by: Binbin Zhou <zhoubinbin@loongson.cn>
+> >=20
+> > Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
+> > Tested-by: Randy Dunlap <rdunlap@infradead.org>
+> >=20
+> > Thanks.
+>=20
+> What's the status of this patch?
+> linux-next builds are still failing without this patch.
 
+Likely suffering (still) from:
+
+https://lore.kernel.org/all/58500dc7-af1b-4edb-bb2b-93be454ec151@app.fastma=
+il.com/
+
+:)
+
+Seemingly this was sent again in isolation 2 weeks ago, but neither the
+maintainer (Huacai) nor soc@kernel.org were on cc:
+
+https://lore.kernel.org/all/20230905123629.4510-1-zhuyinbo@loongson.cn/
+
+/shrug
+Conor.
+
+>=20
+> Thanks.
+>=20
+> >=20
+> >> ---
+> >>  drivers/soc/loongson/Kconfig | 1 +
+> >>  1 file changed, 1 insertion(+)
+> >>
+> >> diff --git a/drivers/soc/loongson/Kconfig b/drivers/soc/loongson/Kconf=
+ig
+> >> index 314e13bb3e01..368344943a93 100644
+> >> --- a/drivers/soc/loongson/Kconfig
+> >> +++ b/drivers/soc/loongson/Kconfig
+> >> @@ -20,6 +20,7 @@ config LOONGSON2_GUTS
+> >>  config LOONGSON2_PM
+> >>  	bool "Loongson-2 SoC Power Management Controller Driver"
+> >>  	depends on LOONGARCH && OF
+> >> +	depends on INPUT=3Dy
+> >>  	help
+> >>  	  The Loongson-2's power management controller was ACPI, supports AC=
+PI
+> >>  	  S2Idle (Suspend To Idle), ACPI S3 (Suspend To RAM), ACPI S4 (Suspe=
+nd To
+> >=20
+>=20
+> --=20
+> ~Randy
+
+--t2Nc9cLRgLLRvvZk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZQnCzgAKCRB4tDGHoIJi
+0jO4AP975FE6oYmpGallhbaLdc+2T3L7g7mWuaSE3yE6mN2obAD9HhjeJqVe5JIE
+yPXMrHl5ifXinHzf9ci5k4OIolVEOgs=
+=xPZ9
+-----END PGP SIGNATURE-----
+
+--t2Nc9cLRgLLRvvZk--
 
