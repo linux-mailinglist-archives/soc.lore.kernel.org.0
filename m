@@ -1,180 +1,150 @@
-Return-Path: <devicetree+bounces-1478-lists+devicetree=lfdr.de@vger.kernel.org>
+Return-Path: <devicetree+bounces-4397-lists+devicetree=lfdr.de@vger.kernel.org>
 X-Original-To: lists+devicetree@lfdr.de
 Delivered-To: lists+devicetree@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id C69417A6853
-	for <lists+devicetree@lfdr.de>; Tue, 19 Sep 2023 17:48:44 +0200 (CEST)
-Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 805CE28119F
-	for <lists+devicetree@lfdr.de>; Tue, 19 Sep 2023 15:48:43 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 61BDA7B25AD
+	for <lists+devicetree@lfdr.de>; Thu, 28 Sep 2023 21:09:39 +0200 (CEST)
+Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
+	by sv.mirrors.kernel.org (Postfix) with ESMTP id 0EFDD281C1A
+	for <lists+devicetree@lfdr.de>; Thu, 28 Sep 2023 19:09:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9540E374EE;
-	Tue, 19 Sep 2023 15:48:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A712C347A8;
+	Thu, 28 Sep 2023 19:09:36 +0000 (UTC)
 X-Original-To: devicetree@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C21C3717C;
-	Tue, 19 Sep 2023 15:48:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBD44C433C8;
-	Tue, 19 Sep 2023 15:48:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 972CB320E
+	for <devicetree@vger.kernel.org>; Thu, 28 Sep 2023 19:09:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1A92AC433C7;
+	Thu, 28 Sep 2023 19:09:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1695138520;
-	bh=YMEj73REI1J6u0MY5w+tGzdmS4rNaNnduItLCa1dOts=;
-	h=Date:From:To:List-Id:Cc:Subject:References:In-Reply-To:From;
-	b=sYq30tepoj+a11qJWgfcbXS96cvQhIhJjGEsH/TFIk3mIZyMU3YYX2XvkQ/ArdbR8
-	 MzGYrS8YeM+/7tPvIAh166EidCKOgkZkrIlPPhIrxAsYxdBJ2lHUv+71t4+NBrSLMU
-	 NT/OrxW1k0xSq756KaCShLkPYV4Kk5rEtPViW+1ibz37jZCLKW77J9qHhum+yU7G48
-	 cPfgvkWzLtP48/OL6SsKupPfc9NtFnJ5JO6r5g91pviFXxm8ZRftKSvHZH+BuniDaq
-	 UzEoROLt2xc5HArvfN5zwQH/v93aHlMKXxhaxB9fsAiGOE6uki2nKJyZE5K56HpcQ1
-	 cjfCN+JkAroQA==
-Date: Tue, 19 Sep 2023 16:48:34 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Randy Dunlap <rdunlap@infradead.org>
+	s=k20201202; t=1695928176;
+	bh=NNBARFfyUVxajH47uEvpoDKyKg7LrRKhbZajQk0wqWs=;
+	h=From:List-Id:To:Cc:Subject:Date:From;
+	b=Jpeng7OPk/BJh4sB9WqNmp6Bgex33CbfWEJvn51eQuVZKN0mGcuo5d9B98ToPOoab
+	 DvmHV1FUqe6Kcxwi1MHZNAGiNKFUytxXGSr8gDlTf6+89MVrxKg7fU9FVx5sVHzA7T
+	 Iu3MS9iIb6E88fBayNjO6s5fEmulwPbf54YakNVNLCXiGrIgMtuXvw9EswtynzLHOT
+	 idiyiPX2y4VCh8LXM/vpoXAtoS7cSDqC13oS6nPZ1LEfPaWUVrpzdUr9QcDARh9vHG
+	 sPctY5p/FyWWUxJjjd3eNSZKK5rRjlQ+WHPcniyhfIjVHJI45AmrQdXK4XElQZ5GAE
+	 GqZipGd02dHyA==
+Received: (nullmailer pid 1073441 invoked by uid 1000);
+	Thu, 28 Sep 2023 19:09:32 -0000
+From: Rob Herring <robh@kernel.org>
 List-Id: <soc.lore.kernel.org>
-Cc: Binbin Zhou <zhoubinbin@loongson.cn>,
-	Binbin Zhou <zhoubb.aaron@gmail.com>,
-	Huacai Chen <chenhuacai@loongson.cn>,
-	Yinbo Zhu <zhuyinbo@loongson.cn>, Arnd Bergmann <arnd@arndb.de>,
-	Rob Herring <robh+dt@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Huacai Chen <chenhuacai@kernel.org>,
-	loongson-kernel@lists.loongnix.cn, soc@kernel.org,
-	devicetree@vger.kernel.org, linux-pm@vger.kernel.org,
-	Xuerui Wang <kernel@xen0n.name>, loongarch@lists.linux.dev
-Subject: Re: [PATCH v3 1/5] soc: loongson: loongson2_pm: Add dependency for
- INPUT
-Message-ID: <20230919-9ce82588fccdd641574b468c@fedora>
-References: <cover.1693623752.git.zhoubinbin@loongson.cn>
- <16a37f6ad3cc9417b6638c2cd532d88c79468eb1.1693623752.git.zhoubinbin@loongson.cn>
- <885eab85-2c11-cf20-9187-55cd647fbe9f@infradead.org>
- <c7604f6c-4da7-47c4-abe9-e626b3efc665@infradead.org>
+To: soc@kernel.org, Viresh Kumar <vireshk@kernel.org>, Shiraz Hashim <shiraz.linux.kernel@gmail.com>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Tom Lendacky <thomas.lendacky@amd.com>, Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>, Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
+Cc: linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH] arm/arm64: dts: Removed undocumented and unused "pl022,hierarchy" property
+Date: Thu, 28 Sep 2023 14:08:45 -0500
+Message-Id: <20230928190859.1072420-1-robh@kernel.org>
+X-Mailer: git-send-email 2.40.1
 Precedence: bulk
 X-Mailing-List: devicetree@vger.kernel.org
 List-Id: <devicetree.vger.kernel.org>
 List-Subscribe: <mailto:devicetree+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="t2Nc9cLRgLLRvvZk"
-Content-Disposition: inline
-In-Reply-To: <c7604f6c-4da7-47c4-abe9-e626b3efc665@infradead.org>
+Content-Transfer-Encoding: 8bit
 
+The "pl022,hierarchy" is not documented, all instances use are 0 and
+isn't handled in the kernel driver, so let's just remove it.
 
---t2Nc9cLRgLLRvvZk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Rob Herring <robh@kernel.org>
+---
+Arnd, Please apply this directly.
 
-On Tue, Sep 19, 2023 at 08:36:50AM -0700, Randy Dunlap wrote:
-> Hi--
->=20
-> On 9/2/23 08:43, Randy Dunlap wrote:
-> >=20
-> >=20
-> > On 9/2/23 01:47, Binbin Zhou wrote:
-> >> Since commit 67694c076bd7 ("soc: loongson2_pm: add power management
-> >> support"), the Loongson-2K PM driver was added, but it didn't update t=
-he
-> >> Kconfig entry for the INPUT dependency, leading to build errors:
-> >>
-> >> /opt/crosstool/gcc-13.2.0-nolibc/loongarch64-linux/bin/loongarch64-lin=
-ux-ld:
-> >> drivers/soc/loongson/loongson2_pm.o: in function `loongson2_power_butt=
-on_init':
-> >> /work/lnx/next/linux-next-20230825/LOONG64/../drivers/soc/loongson/loo=
-ngson2_pm.c:101:(.text+0x350): undefined reference to `input_allocate_devic=
-e'
-> >> /opt/crosstool/gcc-13.2.0-nolibc/loongarch64-linux/bin/loongarch64-lin=
-ux-ld:
-> >> /work/lnx/next/linux-next-20230825/LOONG64/../drivers/soc/loongson/loo=
-ngson2_pm.c:109:(.text+0x3dc): undefined reference to `input_set_capability'
-> >> /opt/crosstool/gcc-13.2.0-nolibc/loongarch64-linux/bin/loongarch64-lin=
-ux-ld:
-> >> /work/lnx/next/linux-next-20230825/LOONG64/../drivers/soc/loongson/loo=
-ngson2_pm.c:111:(.text+0x3e4): undefined reference to `input_register_devic=
-e'
-> >> /opt/crosstool/gcc-13.2.0-nolibc/loongarch64-linux/bin/loongarch64-lin=
-ux-ld:
-> >> /work/lnx/next/linux-next-20230825/LOONG64/../drivers/soc/loongson/loo=
-ngson2_pm.c:125:(.text+0x3fc): undefined reference to `input_free_device'
-> >> /opt/crosstool/gcc-13.2.0-nolibc/loongarch64-linux/bin/loongarch64-lin=
-ux-ld: drivers/soc/loongson/loongson2_pm.o: in function `input_report_key':
-> >> /work/lnx/next/linux-next-20230825/LOONG64/../include/linux/input.h:42=
-5:(.text+0x58c): undefined reference to `input_event'
-> >>
-> >> Also, since this driver can only be built-in, it fails to link when the
-> >> INPUT is in a loadable module, so we should update the Kconfig entry to
-> >> depend on INPUT=3Dy.
-> >>
-> >> Fixes: 67694c076bd7 ("soc: loongson2_pm: add power management support")
-> >> Reported-by: Randy Dunlap <rdunlap@infradead.org>
-> >> Signed-off-by: Binbin Zhou <zhoubinbin@loongson.cn>
-> >=20
-> > Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
-> > Tested-by: Randy Dunlap <rdunlap@infradead.org>
-> >=20
-> > Thanks.
->=20
-> What's the status of this patch?
-> linux-next builds are still failing without this patch.
+ arch/arm/boot/dts/st/spear1310-evb.dts              | 2 --
+ arch/arm/boot/dts/st/spear1340-evb.dts              | 2 --
+ arch/arm64/boot/dts/amd/amd-overdrive-rev-b0.dts    | 1 -
+ arch/arm64/boot/dts/amd/amd-overdrive-rev-b1.dts    | 1 -
+ arch/arm64/boot/dts/broadcom/northstar2/ns2-svk.dts | 2 --
+ 5 files changed, 8 deletions(-)
 
-Likely suffering (still) from:
+diff --git a/arch/arm/boot/dts/st/spear1310-evb.dts b/arch/arm/boot/dts/st/spear1310-evb.dts
+index 05408df38203..18191a87f07c 100644
+--- a/arch/arm/boot/dts/st/spear1310-evb.dts
++++ b/arch/arm/boot/dts/st/spear1310-evb.dts
+@@ -352,7 +352,6 @@ stmpe610@0 {
+ 					#size-cells = <0>;
+ 					spi-max-frequency = <1000000>;
+ 					spi-cpha;
+-					pl022,hierarchy = <0>;
+ 					pl022,interface = <0>;
+ 					pl022,slave-tx-disable;
+ 					pl022,com-mode = <0>;
+@@ -385,7 +384,6 @@ flash@1 {
+ 					spi-max-frequency = <12000000>;
+ 					spi-cpol;
+ 					spi-cpha;
+-					pl022,hierarchy = <0>;
+ 					pl022,interface = <0>;
+ 					pl022,slave-tx-disable;
+ 					pl022,com-mode = <0x2>;
+diff --git a/arch/arm/boot/dts/st/spear1340-evb.dts b/arch/arm/boot/dts/st/spear1340-evb.dts
+index 7700f2afc128..cea624fc745c 100644
+--- a/arch/arm/boot/dts/st/spear1340-evb.dts
++++ b/arch/arm/boot/dts/st/spear1340-evb.dts
+@@ -445,7 +445,6 @@ flash@0 {
+ 					spi-max-frequency = <12000000>;
+ 					spi-cpol;
+ 					spi-cpha;
+-					pl022,hierarchy = <0>;
+ 					pl022,interface = <0>;
+ 					pl022,slave-tx-disable;
+ 					pl022,com-mode = <0x2>;
+@@ -461,7 +460,6 @@ stmpe610@1 {
+ 					spi-max-frequency = <1000000>;
+ 					spi-cpha;
+ 					reg = <1>;
+-					pl022,hierarchy = <0>;
+ 					pl022,interface = <0>;
+ 					pl022,slave-tx-disable;
+ 					pl022,com-mode = <0>;
+diff --git a/arch/arm64/boot/dts/amd/amd-overdrive-rev-b0.dts b/arch/arm64/boot/dts/amd/amd-overdrive-rev-b0.dts
+index 21149acb6b31..1a65f1ec183d 100644
+--- a/arch/arm64/boot/dts/amd/amd-overdrive-rev-b0.dts
++++ b/arch/arm64/boot/dts/amd/amd-overdrive-rev-b0.dts
+@@ -64,7 +64,6 @@ sdcard0: sdcard@0 {
+ 		reg = <0>;
+ 		spi-max-frequency = <20000000>;
+ 		voltage-ranges = <3200 3400>;
+-		pl022,hierarchy = <0>;
+ 		pl022,interface = <0>;
+ 		pl022,com-mode = <0x0>;
+ 		pl022,rx-level-trig = <0>;
+diff --git a/arch/arm64/boot/dts/amd/amd-overdrive-rev-b1.dts b/arch/arm64/boot/dts/amd/amd-overdrive-rev-b1.dts
+index 99205ae1b46b..52f8d36295a8 100644
+--- a/arch/arm64/boot/dts/amd/amd-overdrive-rev-b1.dts
++++ b/arch/arm64/boot/dts/amd/amd-overdrive-rev-b1.dts
+@@ -76,7 +76,6 @@ sdcard0: sdcard@0 {
+ 		reg = <0>;
+ 		spi-max-frequency = <20000000>;
+ 		voltage-ranges = <3200 3400>;
+-		pl022,hierarchy = <0>;
+ 		pl022,interface = <0>;
+ 		pl022,com-mode = <0x0>;
+ 		pl022,rx-level-trig = <0>;
+diff --git a/arch/arm64/boot/dts/broadcom/northstar2/ns2-svk.dts b/arch/arm64/boot/dts/broadcom/northstar2/ns2-svk.dts
+index fbf0392b8371..dec5a110f1e8 100644
+--- a/arch/arm64/boot/dts/broadcom/northstar2/ns2-svk.dts
++++ b/arch/arm64/boot/dts/broadcom/northstar2/ns2-svk.dts
+@@ -113,7 +113,6 @@ slic@0 {
+ 		spi-max-frequency = <5000000>;
+ 		spi-cpha;
+ 		spi-cpol;
+-		pl022,hierarchy = <0>;
+ 		pl022,interface = <0>;
+ 		pl022,slave-tx-disable = <0>;
+ 		pl022,com-mode = <0>;
+@@ -137,7 +136,6 @@ at25@0 {
+ 		at25,page-size = <64>;
+ 		spi-cpha;
+ 		spi-cpol;
+-		pl022,hierarchy = <0>;
+ 		pl022,interface = <0>;
+ 		pl022,slave-tx-disable = <0>;
+ 		pl022,com-mode = <0>;
+-- 
+2.40.1
 
-https://lore.kernel.org/all/58500dc7-af1b-4edb-bb2b-93be454ec151@app.fastma=
-il.com/
-
-:)
-
-Seemingly this was sent again in isolation 2 weeks ago, but neither the
-maintainer (Huacai) nor soc@kernel.org were on cc:
-
-https://lore.kernel.org/all/20230905123629.4510-1-zhuyinbo@loongson.cn/
-
-/shrug
-Conor.
-
->=20
-> Thanks.
->=20
-> >=20
-> >> ---
-> >>  drivers/soc/loongson/Kconfig | 1 +
-> >>  1 file changed, 1 insertion(+)
-> >>
-> >> diff --git a/drivers/soc/loongson/Kconfig b/drivers/soc/loongson/Kconf=
-ig
-> >> index 314e13bb3e01..368344943a93 100644
-> >> --- a/drivers/soc/loongson/Kconfig
-> >> +++ b/drivers/soc/loongson/Kconfig
-> >> @@ -20,6 +20,7 @@ config LOONGSON2_GUTS
-> >>  config LOONGSON2_PM
-> >>  	bool "Loongson-2 SoC Power Management Controller Driver"
-> >>  	depends on LOONGARCH && OF
-> >> +	depends on INPUT=3Dy
-> >>  	help
-> >>  	  The Loongson-2's power management controller was ACPI, supports AC=
-PI
-> >>  	  S2Idle (Suspend To Idle), ACPI S3 (Suspend To RAM), ACPI S4 (Suspe=
-nd To
-> >=20
->=20
-> --=20
-> ~Randy
-
---t2Nc9cLRgLLRvvZk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEARYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZQnCzgAKCRB4tDGHoIJi
-0jO4AP975FE6oYmpGallhbaLdc+2T3L7g7mWuaSE3yE6mN2obAD9HhjeJqVe5JIE
-yPXMrHl5ifXinHzf9ci5k4OIolVEOgs=
-=xPZ9
------END PGP SIGNATURE-----
-
---t2Nc9cLRgLLRvvZk--
 
