@@ -1,20 +1,20 @@
-Return-Path: <linux-rtc+bounces-117-lists+linux-rtc=lfdr.de@vger.kernel.org>
-X-Original-To: lists+linux-rtc@lfdr.de
-Delivered-To: lists+linux-rtc@lfdr.de
+Return-Path: <devicetree+bounces-10944-lists+devicetree=lfdr.de@vger.kernel.org>
+X-Original-To: lists+devicetree@lfdr.de
+Delivered-To: lists+devicetree@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FA007D3957
-	for <lists+linux-rtc@lfdr.de>; Mon, 23 Oct 2023 16:31:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA19D7D3958
+	for <lists+devicetree@lfdr.de>; Mon, 23 Oct 2023 16:31:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4D5EE2812C1
-	for <lists+linux-rtc@lfdr.de>; Mon, 23 Oct 2023 14:31:38 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7961F281345
+	for <lists+devicetree@lfdr.de>; Mon, 23 Oct 2023 14:31:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EC5AF13FF7;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E9824134DF;
 	Mon, 23 Oct 2023 14:31:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
 	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HrDIxiY3"
-X-Original-To: linux-rtc@vger.kernel.org
+X-Original-To: devicetree@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
@@ -57,10 +57,10 @@ Date: Mon, 23 Oct 2023 16:31:23 +0200
 Message-ID: <20231023143130.11602-1-kabel@kernel.org>
 X-Mailer: git-send-email 2.41.0
 Precedence: bulk
-X-Mailing-List: linux-rtc@vger.kernel.org
-List-Id: <linux-rtc.vger.kernel.org>
-List-Subscribe: <mailto:linux-rtc+subscribe@vger.kernel.org>
-List-Unsubscribe: <mailto:linux-rtc+unsubscribe@vger.kernel.org>
+X-Mailing-List: devicetree@vger.kernel.org
+List-Id: <devicetree.vger.kernel.org>
+List-Subscribe: <mailto:devicetree+subscribe@vger.kernel.org>
+List-Unsubscribe: <mailto:devicetree+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
