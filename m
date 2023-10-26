@@ -1,20 +1,20 @@
-Return-Path: <devicetree+bounces-12221-lists+devicetree=lfdr.de@vger.kernel.org>
-X-Original-To: lists+devicetree@lfdr.de
-Delivered-To: lists+devicetree@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 727F77D8695
-	for <lists+devicetree@lfdr.de>; Thu, 26 Oct 2023 18:18:23 +0200 (CEST)
+Return-Path: <linux-rtc+bounces-137-lists+linux-rtc=lfdr.de@vger.kernel.org>
+X-Original-To: lists+linux-rtc@lfdr.de
+Delivered-To: lists+linux-rtc@lfdr.de
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id B79537D8696
+	for <lists+linux-rtc@lfdr.de>; Thu, 26 Oct 2023 18:18:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A25511C20AE4
-	for <lists+devicetree@lfdr.de>; Thu, 26 Oct 2023 16:18:22 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 37BF11F229C8
+	for <lists+linux-rtc@lfdr.de>; Thu, 26 Oct 2023 16:18:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 459EC381B9;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E3B7381BA;
 	Thu, 26 Oct 2023 16:18:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
 	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V8nC0qFQ"
-X-Original-To: devicetree@vger.kernel.org
+X-Original-To: linux-rtc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
@@ -57,10 +57,10 @@ Date: Thu, 26 Oct 2023 18:17:56 +0200
 Message-ID: <20231026161803.16750-1-kabel@kernel.org>
 X-Mailer: git-send-email 2.41.0
 Precedence: bulk
-X-Mailing-List: devicetree@vger.kernel.org
-List-Id: <devicetree.vger.kernel.org>
-List-Subscribe: <mailto:devicetree+subscribe@vger.kernel.org>
-List-Unsubscribe: <mailto:devicetree+unsubscribe@vger.kernel.org>
+X-Mailing-List: linux-rtc@vger.kernel.org
+List-Id: <linux-rtc.vger.kernel.org>
+List-Subscribe: <mailto:linux-rtc+subscribe@vger.kernel.org>
+List-Unsubscribe: <mailto:linux-rtc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
